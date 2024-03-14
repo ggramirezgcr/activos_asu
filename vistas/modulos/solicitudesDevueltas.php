@@ -15,12 +15,12 @@ if (isset($_SESSION['id'])) {
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Administrar categorias</h1>
+          <h1>Historial de préstamo de activos</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="inicio">Inicio</a></li>
-            <li class="breadcrumb-item active">Categorias</li>
+            <li class="breadcrumb-item active">Historial de préstamos</li>
           </ol>
         </div>
       </div>
@@ -36,7 +36,7 @@ if (isset($_SESSION['id'])) {
 
       <!--ENCABEZADO CARD-->
       <div class="card-header">
-        <h3 class="card-title">Historial de activos en prestamo.</h3>
+        <h3 class="card-title"></h3>
       </div>
 
       <!--CUERPO CARD-->

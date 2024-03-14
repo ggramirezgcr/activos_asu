@@ -105,7 +105,7 @@ class ModeloSolicitud
     // ====================================================== //
     public static function mdlOcultarSolicitud($tabla, $item, $valor) {
        
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET ocultar_sa ='1', devuelto_Sa = null WHERE $item = :$item");
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET ocultar_sa ='1' WHERE $item = :$item");
         $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR );
 
         if ($stmt->execute()) {
@@ -150,8 +150,8 @@ class ModeloSolicitud
                     INNER JOIN funcionario ON solicitudes_activos.receptor_sa = funcionario.id_funcionario)
                     INNER JOIN activo ON solicitudes_activos.activo_sa = activo.id_activo)
                     LEFT JOIN categoria ON activo.categoria_activo = categoria.id_categoria)
-                    LEFT JOIN subcategoria ON activo.subcategoria_activo = subcategoria.detalle_subcategoria)
-                    LEFT JOIN marca ON activo.marca_activo = marca.detalle_marca
+                    LEFT JOIN subcategoria ON activo.subcategoria_activo = subcategoria.id_subcategoria)
+                    right JOIN marca ON activo.marca_activo = marca.id_marca
                     WHERE emisor_sa = :valor3 
                     AND (devuelto_sa = 1 or respta_receptor_sa = 0) 
                     AND DATE(fecha_crea_sa) BETWEEN DATE(:valor1) AND DATE(:valor2) < CURDATE() + INTERVAL 1 DAY";
