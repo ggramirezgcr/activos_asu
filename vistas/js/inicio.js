@@ -32,6 +32,8 @@ $(document).ready(function () {
                         return e.cantidad;
                     });
 
+                    let color = generarColores(data.length)
+
                     // Configuración del gráfico
                     let config = {
                         type: 'bar',
@@ -40,20 +42,8 @@ $(document).ready(function () {
                             datasets: [{
                                 label: 'Activos',
                                 data: data,
-                                backgroundColor: [
-                                    'rgba(255, 99, 133, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 133, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)'
-                                ],
+                                backgroundColor: color,
+                                borderColor: color,
                                 borderWidth: 4
                             }]
                         },
@@ -62,9 +52,9 @@ $(document).ready(function () {
                             responsive: true,
                             legend: {
                                 display: false
-                              },
+                            },
                             scales: {
-                                
+
                                 xAxes: [{
                                     gridLines: {
                                         display: false,
@@ -78,7 +68,7 @@ $(document).ready(function () {
                                         beginAtZero: true
                                     }
                                 }]
-                                
+
                             }
                         }
                     };
@@ -99,7 +89,7 @@ $(document).ready(function () {
 
 
 
-     // ====================================================== //
+    // ====================================================== //
     // = CARGAR INFORMACION DE GRAFICO XSOLICITUD =========== //
     // ====================================================== //
     function cargarGraficoInicioSolicitud(respuesta) {
@@ -123,6 +113,9 @@ $(document).ready(function () {
                         return e.cantidad;
                     });
 
+                    //Generar color
+                    let color = generarColores(data.length)
+
                     // Configuración del gráfico
                     let config = {
                         type: 'polarArea',
@@ -131,16 +124,10 @@ $(document).ready(function () {
                             datasets: [{
                                 label: 'Activos',
                                 data: data,
-                                backgroundColor: [
-                                    'rgba(255, 99, 133, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                ],
+                                backgroundColor: color,
                                 borderColor: [
                                     'rgba(255, 255, 255, 1)'
-                                    
+
                                 ],
                                 borderWidth: 4
                             }]
@@ -150,9 +137,9 @@ $(document).ready(function () {
                             responsive: true,
                             legend: {
                                 display: false
-                              },
+                            },
                             scales: {
-                                
+
                                 xAxes: [{
                                     gridLines: {
                                         display: false,
@@ -166,7 +153,7 @@ $(document).ready(function () {
                                         beginAtZero: true
                                     }
                                 }]
-                                
+
                             }
                         }
                     };
@@ -186,6 +173,49 @@ $(document).ready(function () {
     }
 
 
+    // Función para generar un arreglo de colores
+    function generarColores(num) {
+        let colors = [];
+
+        for (let i = 0; i < num; i++) {
+            colors.push(obtenerColor(i));
+        }
+        return colors;
+    }
+
+    // Función para obtener un color aleatorio
+    function obtenerColor(index) {
+        switch (index) {
+            case 0:
+                return 'rgba(255, 99, 133, 1)';
+
+            case 1:
+                return 'rgba(54, 162, 235, 1)';
+            case 2:
+                return 'rgba(255, 206, 86, 1)';
+        
+            case 3:
+                return 'rgba(75, 192, 192, 1)';
+        
+            case 4:
+                return 'rgba(153, 102, 255, 1)';
+            case 5:
+                return 'rgba(255, 153, 204, 1)';
+            case 6:
+                return 'rgba(153, 255, 153, 1)';
+            case 7:
+                return 'rgba(255, 0, 255, 1) ';
+            case 8:
+                return 'rgba(153, 204, 255, 1) ';
+            case 9:
+                return 'rgba(204, 102, 153, 1)';
+        
+            default:
+                return 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ', 1)';
+                
+        }
+        
+    }
 
 
     // ====================================================== //
@@ -197,7 +227,7 @@ $(document).ready(function () {
         let datos = new FormData();
         datos.append("id", nidUser);
         datos.append("totalActivosXcat", true);
-        
+
 
         // Configurar la solicitud Fetch
         fetch("ajax/activos.ajax.php", {
@@ -218,17 +248,17 @@ $(document).ready(function () {
             .then(function (respuesta) {
                 //alert("Hola");
                 //console.log("Estos son los datos", respuesta);
-               
-                    cargarGraficoInicio(respuesta);
 
-              
+                cargarGraficoInicio(respuesta);
+
+
             })
             .catch(function (error) {
                 console.log("***Error***:", error);
             });
     }
 
-     // ====================================================== //
+    // ====================================================== //
     // =================== TOTAL DE ACTIVOS POR CATEGORIA === //
     // ====================================================== //
     function TotalActivosXSolicitud() {
@@ -237,7 +267,7 @@ $(document).ready(function () {
         let datos = new FormData();
         datos.append("id", nidUser);
         datos.append("totalActivosXsol", true);
-        
+
 
         // Configurar la solicitud Fetch
         fetch("ajax/activos.ajax.php", {
@@ -258,8 +288,8 @@ $(document).ready(function () {
             .then(function (respuesta) {
                 //alert("Hola");
                 //console.log("Estos son los datos", respuesta);
-                    cargarGraficoInicioSolicitud(respuesta);
-                })
+                cargarGraficoInicioSolicitud(respuesta);
+            })
             .catch(function (error) {
                 console.log("***Error***:", error);
             });

@@ -1,5 +1,80 @@
 
+async function Buscar_activo(strPlaca, callback) {
+  try {
+      let datos = new FormData();
+
+      datos.append("placa", strPlaca);
+      datos.append("consultar", true);
+
+      const respuesta = await // Configurar la solicitud Fetch
+      fetch("ajax/activos.ajax.php", {
+        method: "POST",
+        body: datos,
+        cache: "no-cache"
+      });
+
+      if (!respuesta.ok) {
+        throw{ ok: false, msj:"error 404"};
+      }
+
+      const datos_devueltos = await respuesta.json();
+      callback(datos_devueltos);
+
+  } catch (error) {
+    console.log(error);
+    callback(null);
+  }
+}
+
 $(document).ready(function () {
+
+
+  //Asignar el boton de choose file al btn  escanear codigo
+  /* $(document).on('click', "#btnScanearQrMCA", function (event) {
+     event.preventDefault(); // Evita que el formulario se envíe y recargue la página
+     document.getElementById("scanearQR").click();
+ 
+        document.getElementById('scanearQR').addEventListener('change', leer_QR);
+ 
+    // document.getElementById("card_principal").style.display = "block";
+     //document.getElementById("card_scan_camara").style.display = "none";
+   });*/
+
+
+  //  Esta funcion leer el codigo QR cuando se le pasa el archivo de imagen  //
+  function leer_QR(event) {
+    try {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const imgData = event.target.result;
+        const qrCodeScanner = new Html5Qrcode('qrResult');
+        qrCodeScanner.scanFile(file)
+          .then(decodedText => {
+            document.getElementById("txt_placaBuscarMCA").value = decodedText;
+            document.getElementById("btnBuscarActivoMCA").click();
+          })
+          .catch(err => {
+            msj_toastr("Error", 'Error decodificando QR: ' + err.message, 'e');
+          });
+      };
+      reader.readAsDataURL(file);
+      event.preventDefault();
+
+    } catch (error) {
+      event.preventDefault();
+      console.log(error);
+    } finally {
+      document.getElementById("card_principal").style.display = "block";
+    }
+
+  }
+
+
+
+ 
 
 
   // ====================================================== //
@@ -110,7 +185,7 @@ $(document).ready(function () {
       })
       .then(function (respuesta) {
 
-        if(Object.keys(respuesta).length === 0){
+        if (Object.keys(respuesta).length === 0) {
           msj_toastr("Error", "No se encontro el activo.", 'e');
         }
 
@@ -134,6 +209,70 @@ $(document).ready(function () {
 
   });
 
+
+  // ====================================================== //
+  // ================== CONSULTAR ACTIVO ================== //
+  // ====================================================== //
+ /* $(document).on("click", "#btnBuscarActivo_mEA", function () {
+   /~ debugger;~/
+    let placa = document.getElementById("txt_placaBuscar_mEA").value;
+    let datos = new FormData();
+
+    datos.append("placa", placa);
+    datos.append("consultar", true);
+
+    //Limpiar campos
+    $("#txt_codigoPlaca_mEA").val("");
+    $("#txt_Placa_mEA").val("");
+    $("#txt_Propietario_mEA").val("");
+    $('#txt_categoria_mEA').val("");
+    $('#txt_Marca_mEA').val("");
+    
+    $('#txt_detalle_mEA').val("");
+    $('#txt_subCategoriaMCA').val("");
+   
+    $('#txt_placaBuscarMCA').val("");
+
+
+
+    // Configurar la solicitud Fetch
+    fetch("ajax/activos.ajax.php", {
+      method: "POST",
+      body: datos,
+      cache: "no-cache",
+      headers: {
+        // Puedes ajustar los encabezados según tus necesidades
+        // En este caso, estamos enviando datos en formato FormData
+      },
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Error en la llamada");
+        }
+        return response.json();
+      })
+      .then(function (respuesta) {
+
+        if (Object.keys(respuesta).length === 0) {
+          msj_toastr("Error", "No se encontro el activo.", 'e');
+        }
+        $("#txt_codigoPlaca_mEA").val(respuesta['id_activo']);
+        $("#txt_Placa_mEA").val(respuesta["placa_activo"]);
+        $("#txt_Propietario_mEA").val(respuesta['nombre_funcionario']);
+        $('#txt_categoria_mEA').val(respuesta["detalle_categoria"]);
+        $('#txt_Marca_mEA').val(respuesta["detalle_marca"]);
+        
+        $('#txt_detalle_mEA').val(respuesta["descripcion_activo"]);
+        $('#txt_subCategoria_mEA').val(respuesta['detalle_subcategoria']);
+        
+        $('#txt_placaBuscar_mEA').val("");
+
+      })
+      .catch(function (error) {
+        console.log("***Error***:", error);
+      });
+
+  });*/
 
 
 
@@ -174,12 +313,12 @@ $(document).ready(function () {
 
           const respuesta = await response.json();
 
-          if (respuesta != false) {  
+          if (respuesta != false) {
             if (usuario !== respuesta["id_funcionario"]) {
               msj_toastr("Error", "La placa ingresada no corresponde a ninguno de sus activos.", 'w');
               return;
             }
-          }else{
+          } else {
             msj_toastr("Upps!", "Algo salió mal, no encontramos el activo, puedes intentar ingresar la placa del activo nuevamente.", 'w');
           }
 
@@ -374,9 +513,9 @@ $(document).ready(function () {
   }
 
 
-  
-  
- // ====================================================== //
+
+
+  // ====================================================== //
   // ============== // MODAL BUSCAR ACTIVO ============= //
   // ====================================================== // 
   /**
@@ -384,7 +523,7 @@ $(document).ready(function () {
    */
   $('#modalConsultarActivo').on('shown.bs.modal', function () {
 
-        //Limpiar campos
+    //Limpiar campos
     $("#txt_codigoPlacaMCA").val("");
     $("#txt_PlacaMCA").val("");
     $("#txt_PropietarioMCA").val("");
@@ -396,13 +535,33 @@ $(document).ready(function () {
     $('#txt_localizacionMCA').val("");
     $('#txt_ubicacionMCA').val("");
     $('#txt_placaBuscarMCA').val("");
-    
+
 
   });
 
 
+  // ====================================================== //
+  // =============== MODAL CONSULTAR ACTIVO =============== //
+  // ====================================================== //
+
+  // Evitar que el modal se cierre al cargar el input type file
+  $('#modalConsultarActivo').on('hide.bs.modal', function (event) {
+    // event.preventDefault();
+  });
+
+  let modal = document.getElementById("modalConsultarActivo");
+  let btnCloseModal = document.getElementById("btnCloseModal"); //Btn Cerrar
+  //btnCloseModal.addEventListener("click", closeModal);
+
+  // Función para cerrar el modal
+  function closeModal(event) {
+    // event.preventDefault(); // Evitar que el evento se propague y cierre el modal
+    modal.style.display = "none";
+  };
 
 });
+
+
 
 
 

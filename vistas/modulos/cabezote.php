@@ -45,10 +45,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <a href="" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i> </a>     
     </li>
 
+    
     <li class="nav-item d-none d-sm-inline-block">
       <a class="nav-link" data-widget="navbar-search" href="#" role="button" data-toggle="modal" data-target="#modalConsultarActivo">
           <i class="fas fa-search"></i> Consultar activo
         </a>
+    </li>
+
+    <li class="nav-item d-none d-sm-inline-block">
+      <!--<a class="nav-link" data-widget="navbar-search" href="#" role="button" data-toggle="modal" data-target="#modalLeerQR">
+          <i class="fas fa-search"></i> Camara
+        </a>-->
     </li>
 
   </ul>

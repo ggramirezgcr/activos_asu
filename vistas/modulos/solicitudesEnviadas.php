@@ -147,25 +147,6 @@
               ?>
 
 
-             <!-- <tr>
-               <td>00001</td>
-               <td>1372244</td>
-               <td>Escritorio</td>
-               <td>Estandar</td>
-               <td>Euromobilia</td>
-               <td>Juan Pedro Fuentes Perez</td>
-               <td>2023-09-22 11:05:30</td>
-               <td class="project-state">
-                          <span class="badge badge-success"></i>Aceptado</span>
-      
-               </>
-               <td>
-                 <div class="btn-group btn-group-sm">
-                   <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                   <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                 </div>
-               </td>
-             </tr>-->
            </tbody>
 
 

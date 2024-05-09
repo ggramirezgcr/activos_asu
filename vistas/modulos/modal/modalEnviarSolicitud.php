@@ -1,7 +1,9 @@
+
+ 
  <!--Modal-->
  
- <div class="modal fade" id="modalEnviarPrestamo">
-   <div class="modal-dialog modal-lg">
+ <div class="modal fade" id="modalEnviarPrestamo" tabindex="-2" role="dialog" >
+   <div class="modal-dialog modal-lg" role="document">
      <div class="modal-content">
 
        <!------------------------------------------------------------------->
@@ -26,6 +28,16 @@
 
                <h5 class="mt-4 mb-2">Datos del activo.</h5>
                <hr>
+
+               <!--Fila boton escanear QR-->
+              <div class="row d-sm-none">
+                <div class="col-sm-12 mb-2 col-12 d-flex justify-content-center">
+                  <button type="button" class="btn btn-app bg-teal btn-flat" data-toggle="modal" data-target="#modalLeerQR" id="btnScanearQR_mES">
+                    <i class="fa fa-qrcode"></i> Escanear código
+                  </button>
+                </div>
+
+              </div>
 
                <!--Fila buscar placa-->
 
@@ -141,9 +153,11 @@
                         $valor = null;
 
                         $funcionarios = ControladorFuncionarios::ctrMostrarFuncionarios($item, $valor, false);
-
-                        foreach ($funcionarios as $key => $value) {
-                          echo '<option value="' . $value["id_funcionario"] . '">' . $value["nombre_funcionario"] . '</option>';
+                        if (is_array($funcionarios)) {
+                          # code...
+                          foreach ($funcionarios as $key => $value) {
+                            echo '<option value="' . $value["id_funcionario"] . '">' . $value["nombre_funcionario"] . '</option>';
+                          }
                         }
 
                         ?>

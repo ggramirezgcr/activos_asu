@@ -1,20 +1,71 @@
-
-
 /*ESTILOS PARA LA TABLA*/
 table th {
-    background-color: #03A9F3;
-    color: white;
+  background-color: #03A9F3;
+  color: white;
 }
 
 /*BOTON DE SUBIR IMAGEN*/
-.subir{
-    padding: 5px 10px;
-    background: #f55d3e;
-    color:#fff;
-    border:0px solid #fff;
+.subir {
+  padding: 5px 10px;
+  background: #f55d3e;
+  color: #fff;
+  border: 0px solid #fff;
 }
- 
-.subir:hover{
-    color:#fff;
-    background: #f7cb15;
+
+.subir:hover {
+  color: #fff;
+  background: #f7cb15;
+}
+
+/**/
+/*  ESTILO PARA EL SCANNER  */
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 99%;
+  overflow: hidden;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.qr-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+
+
+
+.scanLine {
+  width: calc(100% - 6px);
+  height: 3px;
+  background-color: rgba(255, 0, 0, 0.40);
+  box-shadow: 0px 0px 10px 7px rgba(255, 99, 71, 0.50);
+  position: absolute;
+  top: 0;
+  left: 3px;
+  animation: scanAnimation 3s linear infinite;
+  z-index: 3;
+}
+
+@keyframes scanAnimation {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 100%;
+  }
 }

@@ -1,3 +1,11 @@
+//"dom": "frtip": Esta opción es la clave para mostrar la caja de búsqueda por defecto. La cadena "frtip" indica el orden y los componentes de la interfaz de usuario de DataTables:
+
+// f: Muestra el campo de búsqueda (filtering input).
+// r: Muestra el procesamiento de datos ('processing...' message).
+// t: Muestra la tabla.
+// i: Muestra la información de paginación.
+// p: Muestra los botones de paginación.
+
 /* ##################################################################### //
 // ############################# DATATABLE    ############################# //
 // ##################################################################### */
@@ -29,8 +37,8 @@ $(document).ready(function ($) {
             {
                 "responsive": true,
                 "autoWidth": false,
+                "dom": "frtip", // Agrega esta línea
                 "language": {
-
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
                     "sZeroRecords": "No se encontraron resultados",
@@ -39,7 +47,7 @@ $(document).ready(function ($) {
                     "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
                     "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
                     "sInfoPostFix": "",
-                    "sSearch": "Buscar:",
+                    "search": "Buscar:",
                     "sUrl": "",
                     "sInfoThousands": ",",
                     "sLoadingRecords": "Cargando...",
@@ -171,7 +179,7 @@ $(document).ready(function ($) {
                         { targets: [10], visible: false, searchable: false },//Serie
                         { targets: [11], visible: false, searchable: false }//Observaciones
                     ],
-                    dom: "B",
+                    dom: 'B<"row"<"col-sm-6 mt-2"l><"col-sm-6"f>>rtip',
                     buttons: [
                         {
                             extend: 'excelHtml5',

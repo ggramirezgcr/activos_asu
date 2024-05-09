@@ -1,5 +1,9 @@
 <?php
 include_once 'vistas/modulos/modal/modalConsultarActivo.php';
+include_once 'vistas/modulos/modal/modalEncautarActivo.php';
+include_once 'vistas/modulos/modal/modalLeerQR.php';
+
+
 ?>
 
 
@@ -80,7 +84,7 @@ include_once 'vistas/modulos/modal/modalConsultarActivo.php';
 
           </ul>
 
-         
+
 
           <!--// --- Consultar Activos -- //-->
           <ul class="nav nav-treeview">
@@ -94,16 +98,25 @@ include_once 'vistas/modulos/modal/modalConsultarActivo.php';
           </ul> <!--/ .Consultar Activos-->
 
 
-           <!--// -------- Activos ------- //-->
-           <ul class="nav nav-treeview">
+          <!--// -------- Activos ------- //-->
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="activos" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Todos los Activos</p>
+              </a>
+            </li>
+          </ul>
 
-<li class="nav-item">
-  <a href="activos" class="nav-link">
-    <i class="far fa-circle nav-icon"></i>
-    <p>Todos los Activos</p>
-  </a>
-</li>
-</ul>
+          <!--// --- Encautar activos --- //-->
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="encautarActivo" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Encautar activo</p>
+              </a>
+            </li>
+          </ul>
 
 
         </li> <!--/ . ACTIVOS-->

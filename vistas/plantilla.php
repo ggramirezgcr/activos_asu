@@ -50,7 +50,7 @@ $_SESSION["timeout"] = time();
     <link rel="stylesheet" href="vistas/dist/css/main.css">
 
     <!-- DataTables -->
-    
+
     <link rel="stylesheet" href="vistas/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="vistas/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="vistas/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -63,82 +63,10 @@ $_SESSION["timeout"] = time();
 
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="vistas/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-   
+
     <!--flatpickr Fechas-->
     <link rel="stylesheet" href="vistas/plugins/flatpickr_/css/flatpickr.min.css">
     <link rel="stylesheet" href="vistas/plugins/flatpickr_/css/material_red.css">
-
-   
-    
-    <!--// ====================================================== //
-    // ================= PLUGINS JAVASCRIPT ================= //
-    // ====================================================== //-->
-
-
-<!-- jQuery -->
-<!--<script src="vistas/plugins/jquery/jquery.min.js"></script>-->
-<script src="vistas/plugins/jquery/jquery-3.7.1.min.js"></script>
-
-<!--Select2-->
-<script src="vistas/plugins/select2/js/select2.full.min.js"></script>
-
-<!-- Bootstrap 4 -->
-<script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- AdminLTE App -->
-<script src="vistas/dist/js/adminlte.js"></script>
-
-<!-- SweetAlert2 -->
-<script src="vistas/plugins/sweetalert2/sweetalert2.min.js"></script>
-
-<!-- Toastr -->
-<script src="vistas/plugins/toastr/toastr.min.js"></script>
-
-<!-- DataTables  & Plugins -->
-<script src="vistas/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="vistas/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-
-<script src="vistas/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="vistas/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-
-<script src="vistas/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="vistas/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-
-<script src="vistas/plugins/jszip/jszip.min.js"></script>
-<script src="vistas/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="vistas/plugins/pdfmake/vfs_fonts.js"></script>
-
-<script src="vistas/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="vistas/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="vistas/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
-<!--moment-->
-<script src="vistas/plugins/moment/moment.min.js"></script>
-<script src="vistas/plugins/inputmask/jquery.inputmask.min.js"></script>
-
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="vistas/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-
-
-<!--flatpickr Fechas-->
-<script src="vistas/plugins/flatpickr_/js/flatpickr.js"></script>
-<script src="vistas/plugins/flatpickr_/js/es.js"></script>
-
-<!--Chart js-->
-<script src="vistas/plugins/chart.js/Chart.min.js"></script>
-
-<!--Script propios-->
-<script src="vistas/js/inicio.js"></script>
-<script src="vistas/js/plantilla.js"></script>
-<script src="vistas/js/mensaje.js"></script>
-<script src="vistas/js/usuarios.js"></script>
-<script src="vistas/js/activos.js"></script>
-<script src="vistas/js/funcionarios.js"></script>
-<script src="vistas/js/solicitudes.js"></script>
-<script src="vistas/js/solicitudesRecibidas.js"></script>
-<script src="vistas/js/solicitudesDevueltas.js"></script>
-<script src="vistas/js/modalConfiguraciones.js"></script>
-
 
 
 
@@ -146,7 +74,6 @@ $_SESSION["timeout"] = time();
 
 
 <!--sidebar-collapse-->
-
 
 <?php
 
@@ -178,27 +105,107 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
             $_GET["ruta"] == "solicitudesEnviadas" ||
             $_GET["ruta"] == "solicitudesRecibidas" ||
             $_GET["ruta"] == "solicitudesDevueltas" ||
+            $_GET["ruta"] == "encautarActivo" ||
             $_GET["ruta"] == "salir"
         ) {
+
             include "modulos/" . $_GET["ruta"] . ".php";
+
+
+            // ##################################################################### //
+            // ################### // - <!--Incluir los js-->  // ################## //
+            // ##################################################################### //
+            include_once "modulos/script_plugins.php";
+
+            // ~ Estos scrip siempre se van a ocupar ~ //
+            echo '<script src="vistas/js/plantilla.js"></script>';
+            echo '<script src="vistas/js/mensaje.js"></script>';
+            echo '<script src="vistas/js/modalConfiguraciones.js"></script>';
+            echo '<script src="vistas/js/activos.js"></script>';
+
+            //  Incluimos el script de acuerdo a si se necesita  //
+            switch ($_GET["ruta"]) {
+
+                case 'inicio':
+                    echo '<script src="vistas/js/inicio.js"></script>';
+                    echo '<script src="vistas/js/funcionarios.js"></script>';
+                    break;
+                case 'usuarios':
+                    echo '<script src="vistas/js/usuarios.js"></script>';
+                    echo '<script src="vistas/js/funcionarios.js"></script>';
+                    break;
+
+                case 'activos':
+                    //  echo '<script src="vistas/js/activos.js"></script>';
+                    break;
+
+                case 'solicitudesEnviadas':
+                    echo '<script src="vistas/js/usuarios.js"></script>';
+                    echo '<script src="vistas/js/funcionarios.js"></script>';
+                    echo '<script src="vistas/js/solicitudes.js"></script>';
+                    // echo '<script src="vistas/js/activos.js"></script>';
+                    break;
+
+                case 'solicitudesRecibidas':
+                    echo '<script src="vistas/js/solicitudesRecibidas.js"></script>';
+                    echo '<script src="vistas/js/modalEnviarSolicitud.js"></script>';
+                    break;
+
+                case 'solicitudesDevueltas':
+                    echo '   <script src="vistas/js/solicitudesDevueltas.js"></script>';
+                    break;
+
+                case 'encautarActivo':
+                    echo '<script src="vistas/js/modalEncautarActivo.js"></script>';
+                    break;
+
+                default:
+                    break;
+            } // ----- /. fin swtch ----- //
+
+            //  Script que siempre se usan pero se agregan al final por orden  //
+            
+            echo '<script src="vistas/js/modalConsultarActivo.js"></script>';
+            echo '<script src="vistas/plugins/jsQR/jsQR.js"></script>';
+            echo '<script src="vistas/js/modalLeerQR.js"></script>';
+            echo '<script src="vistas/js/scanQR.js"></script>';
         } else {
             include "modulos/404.php";
+            include_once "modulos/script_plugins.php";
         }
     } else {
         include "modulos/inicio.php";
+        include_once "modulos/script_plugins.php";
+
+        echo '<script src="vistas/js/inicio.js"></script>';
+
+        // ~ Estos scrip siempre se van a ocupar ~ //
+        echo '<script src="vistas/js/activos.js"></script>';
+        echo '<script src="vistas/js/plantilla.js"></script>';
+        echo '<script src="vistas/js/mensaje.js"></script>';
+        echo '<script src="vistas/js/modalConfiguraciones.js"></script>';
+        echo '<script src="vistas/js/modalConsultarActivo.js"></script>';
+        echo '<script src="vistas/plugins/jsQR/jsQR.js"></script>';
+        echo '<script src="vistas/js/modalLeerQR.js"></script>';
+        echo '<script src="vistas/js/scanQR.js"></script>';
     }
 
     echo '</div>';
     // -- <!-- ./wrapper --> -- //
 
+
 } else {
     echo '<body class="hold-transition sidebar-mini sidebar-collapse login-page">';
     include "modulos/login.php";
+    include_once "modulos/script_plugins.php";
 }
-?>
+
+echo '</body>';
+?> <!--/. -->
 
 
 
-</body>
+<!--</body>-->
+
 
 </html>
