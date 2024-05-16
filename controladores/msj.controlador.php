@@ -15,10 +15,10 @@ class ControladorMensajes
      */
     public static function msj_sweetalert($title, $msj, $type, $value)
     {
-        
+
 
         switch ($type) {
-            
+
             case 'e':
 
 
@@ -74,12 +74,10 @@ class ControladorMensajes
      * @param [type] $value
      * @return void
      */
-    public static function msj_Swal($title, $msj, $type, $value)
+    public static function msj_Swal($title, $msj, $type, $value, $pausar = true)
     {
-        switch ($type) {
-            case "s":
-
-                echo '<script>
+        // Comenzamos la cadena de script de JavaScript
+      $script = '<script>
                 toastr.options = {
                     "closeButton": true,
                     "debug": false,
@@ -96,17 +94,41 @@ class ControladorMensajes
                     "hideEasing": "linear",
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
-                }
-    
-            toastr["success"]("' . $msj . '.", "' . $title . '.")
-    
-            ' . $value . '
-            </script>';
+                };';
 
+              
+                
+
+        // Ahora agregamos el switch
+        switch ($type) {
+            case "s":
+                $script .= 'toastr["success"]("' . $msj . '", "' . $title . '");';
                 break;
-
+            case "e":
+                $script .= 'toastr["error"]("' . $msj . '", "' . $title . '");';
+                break;
+            case "i":
+                $script .= 'toastr["info"]("' . $msj . '", "' . $title . '");';
+                break;
+            case "w":
+                $script .= 'toastr["warning"]("' . $msj . '", "' . $title . '");';
+                break;
             default:
                 break;
         }
+
+        // Finalmente, agregamos la pausa con setTimeout y el resto del script
+        if ($pausar) {
+            $script .= 'setTimeout(function() {
+                        ' . $value . '
+                    }, 2000);</script>';
+        }else {
+            $script .= 'setTimeout(function() {
+                ' . $value . '
+            }, 0);</script>';
+        }
+
+        // Imprimimos el script
+        echo $script;
     }
 }

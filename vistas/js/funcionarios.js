@@ -1,14 +1,59 @@
 
 // ====================================================== //
+// ========= OBTIENE LOS DATOS DE UN FUNCIONARIO ======== //
+// ====================================================== //
+async function datosFuncionario(idFuncionario) {
+  try {
+   
+    datos = new FormData();
+
+    datos.append('idFun', idFuncionario);
+    datos.append('datosFuncionarios', true);
+
+    const respuesta = await fetch("ajax/funcionarios.ajax.php", {
+      method: "POST",
+      body: datos,
+      cache: "no-cache",
+      headers: {
+        // Puedes ajustar los encabezados según tus necesidades
+        // En este caso, estamos enviando datos en formato FormData
+      },
+    });
+
+    if (!respuesta.ok) {
+      const errorData = {
+        ok: false,
+        status: respuesta.status,
+        statusText: respuesta.statusText
+      };
+      throw errorData; 
+    }
+
+    const text = await respuesta.text(); // Obtener el texto de la respuesta
+    const trimmedText = text.trim(); // Eliminar espacios en blanco adicionales
+    const data = JSON.parse(trimmedText); // Intentar analizar la respuesta como JSON
+
+    return data;
+
+  } catch (error) {
+    throw error;
+  }
+
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+
+
+
+})
+
+
+
+// ====================================================== //
 // =========== ASIGNAR SELECT2              ============= //
 // ====================================================== //
 $(window).on('load', function () {
-     //$('#cmbfun_enusuarios').select2('destroy');
   $('#cmbfuncionarios').select2({});
-
- /* $('#cmbfuncionarios').select2({
-    dropdownParent: $('#modalAgregarUsuario .modal-body')
-  });*/
 });
 
 
@@ -16,16 +61,14 @@ $(window).on('load', function () {
 
 
 $(document).ready(function () {
- 
- 
 
 
   // ====================================================== //
   // =================== CARGAR USUARIO DE RED============= //
   // ====================================================== //
 
-  function obtenerUsuarioRed() {
-    let idfuncionario = $('#cmbfuncionarios').val();
+  function obtenerUsuarioRed(idFuncionario_) {
+    let idfuncionario = idFuncionario_;
     let nuevoUsuario = document.getElementById('nuevoUsuario');
     let nuevoNombre = document.getElementById('nuevoNombre');
     let txt_usuarioRedSolEnv = document.getElementById('txt_usuarioRedSolEnv');
@@ -130,26 +173,13 @@ $(document).ready(function () {
     $('#cmbfuncionarios').val(0);
 
     $('#cmbfuncionarios').change(function () {
-      obtenerUsuarioRed();
+      var idfun = $('#cmbfuncionarios').val();
+      obtenerUsuarioRed(idfun);
     })
 
   });
 
-  // ====================================================== //
-  // ============== // MODAL ENVIAR SOLICITUD ============= //
-  // ====================================================== // 
-  /**
-   * Llama la funciones hasta que el modal se abra
-   */
-  $('#modalEnviarPrestamo').on('shown.bs.modal', function () {
 
-    $('#cmbfuncionarios').val(0);
-
-    $('#cmbfuncionarios').change(function () {
-      obtenerUsuarioRed();
-    })
-
-  });
 
 
 

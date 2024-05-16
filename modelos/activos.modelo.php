@@ -208,7 +208,8 @@ class ModeloActivos
             estado_activo,
             eliminado_activo,
             id_sa,
-            devuelto_sa
+            devuelto_sa,
+            respta_receptor_sa
         FROM activo left join solicitudes_activos on activo.id_activo = solicitudes_activos.activo_sa 
             where $item = :$item
             ORDER BY id_sa DESC LIMIT 1

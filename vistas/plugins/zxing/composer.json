@@ -1,0 +1,17 @@
+{
+    "name": "gerald/qr-p",
+    "description": "QR de pruebas",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Gerald Ramírez",
+            "email": "ggramirezg@hotmail.com"
+        }
+    ],
+    "require": {
+        "zxing/qr-reader": "^1.2",
+        "robbiep/zbar-qrdecoder": "^2.0",
+        "khanamiryan/qrcode-detector-decoder": "^2.0"
+    }
+    
+}

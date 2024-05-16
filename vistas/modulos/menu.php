@@ -1,6 +1,6 @@
 <?php
 include_once 'vistas/modulos/modal/modalConsultarActivo.php';
-include_once 'vistas/modulos/modal/modalEncautarActivo.php';
+include_once 'vistas/modulos/modal/modalIncautarActivo.php';
 include_once 'vistas/modulos/modal/modalLeerQR.php';
 
 
@@ -108,12 +108,33 @@ include_once 'vistas/modulos/modal/modalLeerQR.php';
             </li>
           </ul>
 
-          <!--// --- Encautar activos --- //-->
+          <!--// --- Incautar activos --- //-->
+          <?php
+          if (isset($_SESSION["secuestra_activos"])) {
+            if ($_SESSION["secuestra_activos"] === 1) {
+             
+              echo  '<ul class="nav nav-treeview">';
+              echo '<li class="nav-item">';
+              echo '<a href="incautarActivo" class="nav-link">';
+              echo '<i class="far fa-circle nav-icon"></i>';
+              echo '<p>Incautar activo</p>';
+              echo '</a>';
+              echo '</li>';
+              echo '</ul>';
+              
+            }
+          };
+
+          ?>
+
+
+
+          <!--// --- Mis activos incautados --- //-->
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="encautarActivo" class="nav-link">
+              <a href="misActivosIncautados" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Encautar activo</p>
+                <p>Mis activos incautados</p>
               </a>
             </li>
           </ul>

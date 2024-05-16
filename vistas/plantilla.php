@@ -68,7 +68,10 @@ $_SESSION["timeout"] = time();
     <link rel="stylesheet" href="vistas/plugins/flatpickr_/css/flatpickr.min.css">
     <link rel="stylesheet" href="vistas/plugins/flatpickr_/css/material_red.css">
 
-
+    
+    <?php
+    include_once "modulos/script_plugins.php";
+    ?>
 
 </head>
 
@@ -79,7 +82,8 @@ $_SESSION["timeout"] = time();
 
 if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
 
-    echo '<body class="hold-transition sidebar-mini sidebar-collapse">';
+    //echo '<body class="hold-transition sidebar-mini sidebar-collapse layout-fixed layout-navbar-fixed">';
+    echo '<body class="sidebar-mini layout-navbar-fixed layout-fixed sidebar-collapse">';
 
     // - <!-- Site wrapper -->  //
     echo  '<div class="wrapper">';
@@ -105,7 +109,9 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
             $_GET["ruta"] == "solicitudesEnviadas" ||
             $_GET["ruta"] == "solicitudesRecibidas" ||
             $_GET["ruta"] == "solicitudesDevueltas" ||
-            $_GET["ruta"] == "encautarActivo" ||
+            $_GET["ruta"] == "incautarActivo" ||
+            $_GET["ruta"] == "misActivosIncautados" ||
+            $_GET["ruta"] == "acti" ||
             $_GET["ruta"] == "salir"
         ) {
 
@@ -115,10 +121,10 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
             // ##################################################################### //
             // ################### // - <!--Incluir los js-->  // ################## //
             // ##################################################################### //
-            include_once "modulos/script_plugins.php";
+
 
             // ~ Estos scrip siempre se van a ocupar ~ //
-            echo '<script src="vistas/js/plantilla.js"></script>';
+          //  echo '<script src="vistas/js/plantilla.js"></script>';
             echo '<script src="vistas/js/mensaje.js"></script>';
             echo '<script src="vistas/js/modalConfiguraciones.js"></script>';
             echo '<script src="vistas/js/activos.js"></script>';
@@ -143,6 +149,7 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
                     echo '<script src="vistas/js/usuarios.js"></script>';
                     echo '<script src="vistas/js/funcionarios.js"></script>';
                     echo '<script src="vistas/js/solicitudes.js"></script>';
+                    echo '<script src="vistas/js/modalPrestarActivo.js"></script>';
                     // echo '<script src="vistas/js/activos.js"></script>';
                     break;
 
@@ -155,33 +162,40 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
                     echo '   <script src="vistas/js/solicitudesDevueltas.js"></script>';
                     break;
 
-                case 'encautarActivo':
-                    echo '<script src="vistas/js/modalEncautarActivo.js"></script>';
+                case 'incautarActivo':
+                    echo '<script src="vistas/js/modalIncautarActivo.js"></script>';
+                    echo '<script src="vistas/js/incautarActivo.js"></script>';
+
                     break;
+
+                    case 'misActivosIncautados':
+                        echo '<script src="vistas/js/misActivosIncautados.js"></script>';
+                        
+                        break;
 
                 default:
                     break;
             } // ----- /. fin swtch ----- //
 
             //  Script que siempre se usan pero se agregan al final por orden  //
-            
+
             echo '<script src="vistas/js/modalConsultarActivo.js"></script>';
             echo '<script src="vistas/plugins/jsQR/jsQR.js"></script>';
             echo '<script src="vistas/js/modalLeerQR.js"></script>';
             echo '<script src="vistas/js/scanQR.js"></script>';
         } else {
             include "modulos/404.php";
-            include_once "modulos/script_plugins.php";
+           // include_once "modulos/script_plugins.php";
         }
     } else {
         include "modulos/inicio.php";
-        include_once "modulos/script_plugins.php";
+       // include_once "modulos/script_plugins.php";
 
         echo '<script src="vistas/js/inicio.js"></script>';
 
         // ~ Estos scrip siempre se van a ocupar ~ //
         echo '<script src="vistas/js/activos.js"></script>';
-        echo '<script src="vistas/js/plantilla.js"></script>';
+      //  echo '<script src="vistas/js/plantilla.js"></script>';
         echo '<script src="vistas/js/mensaje.js"></script>';
         echo '<script src="vistas/js/modalConfiguraciones.js"></script>';
         echo '<script src="vistas/js/modalConsultarActivo.js"></script>';
@@ -197,8 +211,10 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
 } else {
     echo '<body class="hold-transition sidebar-mini sidebar-collapse login-page">';
     include "modulos/login.php";
-    include_once "modulos/script_plugins.php";
+   // include_once "modulos/script_plugins.php";
 }
+
+
 
 echo '</body>';
 ?> <!--/. -->

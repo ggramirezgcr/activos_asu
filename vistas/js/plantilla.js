@@ -13,6 +13,8 @@ $(document).ready(function ($) {
 
     try {
 
+        
+
 
         // ====================================================== //
         // ================== flatpickr Fechas ================== //
@@ -67,7 +69,7 @@ $(document).ready(function ($) {
             })
 
 
-     
+
         // ====================================================== //
         // ============= Tabla solicitudes enviadas ============= //
         // ====================================================== //
@@ -78,40 +80,40 @@ $(document).ready(function ($) {
                     { targets: [0], orderData: [0, 1], visible: false, searchable: false }
                 ],
                 dom: "B",
-                    buttons: [
-                        {
-                            extend: 'excelHtml5',
-                            text: '<i class="fas fa-file-excel"></i>',
-                            titleAttr: 'Exportar a Excel',
-                            className: 'btn btn-success',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7]
-                            }
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            text: '<i class="fas fa-file-pdf"></i>',
-                            titleAttr: 'Exportar a PDF',
-                            className: 'btn btn-danger',
-                            title: 'Activos en prestamo',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7]
-                            }
-                        },
-                        {
-                            extend: 'print',
-                            text: '<i class="fas fa-print"></i>',
-                            titleAttr: 'Imprimir',
-                            className: 'btn btn-info',
-                            title: 'Activos en prestamo',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7],
-                                orientation: 'landscape'
-                            },
-
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"></i>',
+                        titleAttr: 'Exportar a Excel',
+                        className: 'btn btn-success',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5, 6, 7]
                         }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i>',
+                        titleAttr: 'Exportar a PDF',
+                        className: 'btn btn-danger',
+                        title: 'Activos en prestamo',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5, 6, 7]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i>',
+                        titleAttr: 'Imprimir',
+                        className: 'btn btn-info',
+                        title: 'Activos en prestamo',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5, 6, 7],
+                            orientation: 'landscape'
+                        },
 
-                    ]
+                    }
+
+                ]
             });
         }
 
@@ -269,7 +271,7 @@ $(document).ready(function ($) {
                     ]
                 });
             } else {
-                console.log("La tabla 'tabla_solicitudesDevueltas' no se encontró en el DOM.");
+                // console.log("La tabla 'tabla_solicitudesDevueltas' no se encontró en el DOM.");
             }
         } catch (error) {
             // Manejar el error aquí, puedes imprimirlo en la consola o mostrar un mensaje al usuario

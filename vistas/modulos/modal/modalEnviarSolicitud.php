@@ -135,7 +135,7 @@
                  <input type="hidden" name="idFunReceptor" id="idFunReceptor">
 
                  <div class="col-sm-3">
-                   <label for="txt_cedula">Usuario</label>
+                   <label for="txt_usuarioRedSolEnv">Usuario</label>
                    <input type="text" id="txt_usuarioRedSolEnv" class="form-control" readonly=true>
                  </div>
 
@@ -143,8 +143,9 @@
 
                  <div class="col-sm-6">
                    <div class="form-group">
-                     <label for="cmbfuncionarios">Funcionario</label>
-                     <select name="cmbfuncionarios" id="cmbfuncionarios" class="select2 select2-container select2-container--default select2-container--below select2-container--focus" style="width : 100%">
+                     <label for="cmbfuncionarios_mES">Funcionario</label>
+                     <!--class="select2 select2-container select2-container--default select2-container--below select2-container--focus"-->
+                     <select name="cmbfuncionarios_mES" id="cmbfuncionarios_mES" class="select2" style="width : 100%">
                        <option value="0">Seleccionar funcionario</option>
 
                        <?php

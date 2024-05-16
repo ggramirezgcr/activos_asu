@@ -35,13 +35,19 @@ if (isset($_SESSION['id'])) {
     <!-- Default box -->
     <div class="card">
 
-      <div class="callout callout-info">
-        <h5><i class="fas fa-info"></i> Nota.</h5>
+    <!--ENCABEZADO CARD-->
+    <div class="card-header">
+       <!-- <h1 class="card-title">Recibir activos.</h1>-->
+       <div class="callout callout-info">
+         <h5><i class="fa fa-info-circle"></i> Recibir activos.</h5>
+         <p>En esta página se mostrarán los registros de los prestamos que te han realizado y los cuales no se han devuelto a su propietario, aquí puedes aceptar, rechazar o devolver el registro del préstamo del activo que otros funcionarios te han hecho.</p>
+       </div>
 
-        <p>En esta página se mostrarán los registros de los prestamos que te han realizado y los cuales no se han devuelto a su propietario, aquí puedes aceptar, rechazar o devolver el registro del préstamo del activo que otros funcionarios te han hecho.</p>
       </div>
 
+
       <div class="card-body">
+
 
         <table class="table row-border table-hover dataTable dtr-inline tablas" id="tabla_SolicitudesRecibidas" with=100%>
           <thead>
@@ -69,7 +75,6 @@ if (isset($_SESSION['id'])) {
             $solicitudesRecibidas = ControladorSolicitudesRecibidas::ctrMiSolicitudesRecibidas($item, $valor, $item2, $valor2);
 
             if ($solicitudesRecibidas) {
-
 
 
               foreach ($solicitudesRecibidas as $key => $value) {
@@ -120,24 +125,6 @@ if (isset($_SESSION['id'])) {
             }
 
             ?>
-
-            <!--<tr>
-               <td>00001</td>
-               <td>1372244</td>
-               <td>Escritorio</td>
-               <td>Euromobilia</td>
-               <td>LaMejor</td>
-               <td>Juan Pedro Fuentes Perez</td>
-               <td>2023-09-22 11:05:30</td>
-               <td>
-                 <div class="btn-group">
-                   <button type="button" class="btn bg-teal">Aceptar</button>
-                   <button type="button" class="btn bg-maroon">Rechazar</button>
-                   <button type="button" class="btn bg-indigo">Devolver</button>
-                 </div>
-               </td>
-             </tr>-->
-
           </tbody>
 
 

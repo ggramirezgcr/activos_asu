@@ -4,7 +4,7 @@ $(document).ready(function () {});
      * Muestra un mensaje en pantalla al usuario, el mensaje es con la libreria toastr
      * @param {Titulo del mensaje} strTitulo 
      * @param {Cuerpo del mensaje} strMensaje 
-     * @param {Tipo de msj} tipoMsj 
+     * @param {Tipo de msj} tipoMsj s:succes, e:error, i:info, w:warning 
      */
     function msj_toastr(strTitulo, strMensaje, tipoMsj) {
        
@@ -16,7 +16,7 @@ $(document).ready(function () {});
             "positionClass": "toast-top-right",
             "preventDuplicates": true,
             "onclick": null,
-            "showDuration": "300",
+            "showDuration": "600",
             "hideDuration": "1000",
             "timeOut": "5000",
             "extendedTimeOut": "1000",

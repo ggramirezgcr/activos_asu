@@ -41,6 +41,7 @@ class ControladorUsuarios
                             $_SESSION['usuario'] = $respuesta['usuario'];
                             $_SESSION['foto'] = $respuesta['foto'];
                             $_SESSION['perfil'] = $respuesta['perfil'];
+                            $_SESSION['secuestra_activos'] = $respuesta['secuestra_activos'];
 
                             //  REGISTRAR FECHA PARA SABER EL ULTIMO LOGIN  //
 

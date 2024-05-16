@@ -397,7 +397,12 @@ $(document).ready(function () {
       const respuesta = await response.json();
 
       if (respuesta[0].hasOwnProperty('id_activo')) {
-        return respuesta[0]['devuelto_sa'] == '0';
+        
+        if (respuesta[0]['respta_receptor_sa'] == '0') {
+          return false;
+        }else{
+          return respuesta[0]['devuelto_sa'] == '0';
+        }
       } else {
         throw new Error("La respuesta no contiene id_activo");
       }

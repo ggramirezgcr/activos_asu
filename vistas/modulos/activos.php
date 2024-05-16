@@ -26,9 +26,12 @@ if (isset($_SESSION['id'])) {
     </div><!-- /.container-fluid -->
   </section>
 
+  
 
   <!-- // ~~~~~~~~~ CONTENIDO PRINCIPAL ~~~~~~~~~ // -->
   <section class="content">
+
+  
 
     <!--fila principal-->
     <div class="row">
@@ -37,6 +40,11 @@ if (isset($_SESSION['id'])) {
       <div class="col-lg-8 col-12">
 
         <div class="card">
+ <!--ENCABEZADO CARD-->
+ <div class="card-header">
+        <h2 class="card-title">Todos los activos.</h2>
+      </div>
+
           <div class="card-header border-0">
             <!--table dataTable dtr-inline collapsed-->
             <table class="table table-striped hover tablas" id="tabla_activos">

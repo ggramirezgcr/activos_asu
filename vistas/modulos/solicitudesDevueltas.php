@@ -10,12 +10,13 @@ if (isset($_SESSION['id'])) {
     // ====================================================== // -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
+  
   <section class="content-header">
     <input type="hidden" name="iduser" value=<?php echo $idUsarioLogueado ?>>
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Historial de préstamo de activos</h1>
+          <!--<h1>Historial de préstamo de activos</h1>-->
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -30,13 +31,14 @@ if (isset($_SESSION['id'])) {
 
   <!-- // ~~~~~~~~~ CONTENIDO PRINCIPAL ~~~~~~~~~ // -->
   <section class="content">
+    
 
     <!-- Default box -->
     <div class="card">
 
       <!--ENCABEZADO CARD-->
       <div class="card-header">
-        <h3 class="card-title"></h3>
+        <h2 class="card-title">Historial de préstamo de activos</h2>
       </div>
 
       <!--CUERPO CARD-->

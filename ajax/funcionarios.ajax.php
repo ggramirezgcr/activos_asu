@@ -8,6 +8,19 @@ class ajaxClsFuncionario
 
 
     // ====================================================== //
+    // ================ DATOS DEL FUNCIONARIO ============== //
+    // ====================================================== //
+
+    public function ajaxDatosFuncionario($valor)
+    {
+        $item = "id_funcionario";
+
+        $respuesta = ControladorFuncionarios::ctrMostrarFuncionarios($item, $valor);
+
+        echo json_encode($respuesta, JSON_FORCE_OBJECT);
+    }
+
+    // ====================================================== //
     // ================ OBTENER USUARIO DE RED ============== //
     // ====================================================== //
     public $idFuncionario;
@@ -19,7 +32,7 @@ class ajaxClsFuncionario
 
         $respuesta = ControladorFuncionarios::ctrMostrarFuncionarios($item, $valor);
 
-        echo json_encode($respuesta);
+        echo json_encode($respuesta, JSON_FORCE_OBJECT);
     }
 
 
@@ -29,7 +42,7 @@ class ajaxClsFuncionario
 
     public $strPalabraClave;
 
-   
+
     public function ajaxFiltrarFuncionarios()
     {
         $item = "";
@@ -37,7 +50,7 @@ class ajaxClsFuncionario
 
         $respuesta = ControladorFuncionarios::ctrMostrarFuncionarios($item, $valor, true);
 
-        echo json_encode($respuesta);
+        echo json_encode($respuesta, JSON_FORCE_OBJECT);
     }
 
 
@@ -58,10 +71,22 @@ if (isset($_POST["idFuncionario"])) {
 
 
 // ====================================================== //
-    // ================ FILTRAR FUNCIONARIOS  ============== //
-    // ====================================================== //
+// ================ FILTRAR FUNCIONARIOS  ============== //
+// ====================================================== //
 if (isset($_POST['palabraClave'])) {
     $filtrarFuncionarios = new ajaxClsFuncionario();
     $filtrarFuncionarios->strPalabraClave = $_POST[''];
     $filtrarFuncionarios->ajaxFiltrarFuncionarios();
+}
+
+
+// ====================================================== //
+// ================ DATOS DEL FUNCIONARIO =============== //
+// ====================================================== //
+if (isset($_POST["idFun"])) {
+    if (isset($_POST['datosFuncionarios'])) {
+       $datosFuncionario = new ajaxClsFuncionario();
+       $datosFuncionario->ajaxDatosFuncionario($_POST['idFun']);
+    }
+    
 }
