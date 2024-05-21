@@ -3,21 +3,35 @@
 $(document).ready(function () {
 
     $(document).on('click', '#btnDevolverActivo_oe', function () {
-        let idEncautamiento = $(this).attr('idIncautamiento');
-        let idUsuario = document.getElementsByName('iduser')[0].value;
-      
-        if (idEncautamiento !== null && idUsuario !== null) {
-            window.location = "index.php?ruta=incautarActivo&idIncautamiento=" + idEncautamiento + "&idUser="+idUsuario +"&devolucion=true" ;
+        try {
+            //inicializar modal loading
+            $('#loadingModal').modal('show');
+
+            let idEncautamiento = $(this).attr('idIncautamiento');
+            let idPropietario = $(this).attr('idPorpietario_ia');
+            let placa = $(this).attr('placa_ia');
+            let idUsuario = document.getElementsByName('iduser')[0].value;
+
+            if (idEncautamiento !== null && idUsuario !== null) {
+                window.location = "index.php?ruta=incautarActivo&idIncautamiento=" + idEncautamiento + "&idUser=" + idUsuario + "&devolucion=true" + "&idPropiet=" + idPropietario + "&placa=" + placa;
+            }
+
+        } catch (error) {
+
+        }finally{
+            // Ocultar el modal después del proceso
+            $('#loadingModal').modal('hide');
         }
+
 
     })
 
     $(document).on('click', '#btnOcultarIncautamiento', function () {
         let idEncautamiento = $(this).attr('idIncautamiento');
         let idUsuario = document.getElementsByName('iduser')[0].value;
-      
+
         if (idEncautamiento !== null && idUsuario !== null) {
-            window.location = "index.php?ruta=incautarActivo&idIncautamiento=" + idEncautamiento + "&idUser="+idUsuario +"&ocultar=true" ;
+            window.location = "index.php?ruta=incautarActivo&idIncautamiento=" + idEncautamiento + "&idUser=" + idUsuario + "&ocultar=true";
         }
 
     })
@@ -72,7 +86,7 @@ $(document).ready(function () {
         }
 
     } catch (error) {
-        
+
     }
 
 

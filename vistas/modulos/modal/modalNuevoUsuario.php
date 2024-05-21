@@ -42,7 +42,7 @@
                         <!--<div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-users"></i></span>
                         </div>-->
-                          <select name="cmbfuncionarios" id="cmbfuncionarios" class="form-control input-lg" style="width : 100%">
+                          <select name="cmbfuncionarios" id="cmbfuncionarios" class="form-control input-lg select2" style="width : 100%">
                             <option value="0">Seleccionar funcionario</option>
 
                             <?php
@@ -52,9 +52,12 @@
 
                             $funcionarios = ControladorFuncionarios::ctrMostrarFuncionarios($item, $valor);
 
-                            foreach ($funcionarios as $key => $value) {
-                              echo '<option value="' . $value["id_funcionario"] . '">' . $value["nombre_funcionario"] . '</option>';
+                            if ($funcionarios) {
+                              foreach ($funcionarios as $key => $value) {
+                                echo '<option value="' . $value["id_funcionario"] . '">' . $value["nombre_funcionario"] . '</option>';
+                              }
                             }
+
 
                             ?>
                           </select>
@@ -81,6 +84,21 @@
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                       </div>
                       <input type="text" class="form-control" name="nuevoUsuario" id="nuevoUsuario" placeholder="Usuario" required>
+
+                    </div>
+                  </div>
+
+
+                  <!--ENTRADA EMAIL-->
+                  <div class="form-group">
+
+                    <div class="input-group">
+
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                      </div>
+                      <input type="email" class="form-control" name="nuevoEmail" id="nuevoEmail" placeholder="Email" required>
+
 
                     </div>
                   </div>

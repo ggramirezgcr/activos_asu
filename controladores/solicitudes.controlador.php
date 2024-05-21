@@ -78,6 +78,22 @@ class ControladorSolicitudes
             $respuesta = ModeloSolicitud::mdlNuevaSolicitud($tabla, $datos);
 
             if ($respuesta == 'ok') {
+                $body = new ControladorHelpers();
+                
+                //Imagen
+                if ($_SESSION['nombre'] !== null) {
+                    $imagen = "https://localhost/Activos-ASU/" . $_SESSION['foto'];
+                } else {
+                    $imagen = "https://localhost/Activos-ASU/" . "vistas/img/usuario/default/profile.png"; // Corrección en la ruta de la imagen
+                }
+                 //Nombre
+                 $nombre = $_SESSION['nombre'];
+                 $placa = $_POST['txt_placaActivo_mES'];
+                 $id = $_POST['idFunReceptor'];
+
+                $body = new ControladorHelpers();
+             $html =  $body->ctrhtmlPendientes($nombre, $imagen, 'TE HAN PRESTADO UN ACTIVO',$placa);
+            ControladorEmail::ctrEnviarEmail('Te han prestado un activo','', $html, $id);
 
                 ControladorMensajes::msj_sweetalert('', '¡Registro exitoso!', 's', 'window.location = "solicitudesEnviadas";');
             } else {

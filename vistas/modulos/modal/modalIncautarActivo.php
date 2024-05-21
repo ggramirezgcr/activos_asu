@@ -1,17 +1,12 @@
 <?php
-if (isset($_SESSION["secuestra_activos"])) {
+/*if (isset($_SESSION["secuestra_activos"])) {
   if ($_SESSION["secuestra_activos"] !== 1) {
     echo '<script>
             window.location = "inicio";
         </script>';
     exit();
   }
-} else {
-  echo '<script>
-            window.location = "inicio";
-        </script>';
-  exit();
-};
+};*/
 ?>
 
 <!--Modal-->
@@ -82,11 +77,13 @@ if (isset($_SESSION["secuestra_activos"])) {
 
                 <!--Codigo de la placa-->
                 <input type="hidden" name="txt_codigoPlaca_mEA" id="txt_codigoPlaca_mEA">
+                <input type="hidden" name="idFunReceptor_mIA" id="idFunReceptor_mIA">
 
                 <!--                 PLACA                 -->
                 <div class="col-sm-3">
                   <label for="txt_Placa_mEA">Placa</label>
                   <input type="text" id="txt_Placa_mEA" class="form-control text-danger font-weight-bold" readonly=true>
+                  <input type="hidden" name="placa_mIA" id="placa_mIA">
                 </div>
 
                 <!--                 CATEGORIA                 -->

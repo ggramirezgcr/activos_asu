@@ -338,6 +338,7 @@ $(document).ready(function () {
 
           // Resto del código para actualizar elementos HTML
           $("#txt_codigoPlaca").val(respuesta['id_activo']);
+          $("#txt_placaActivo_mES").val(respuesta["placa_activo"]);
           $("#txt_Placa").val(respuesta["placa_activo"]);
           $('#txt_categoria').val(respuesta["detalle_categoria"]);
           $('#txt_Marca').val(respuesta["detalle_marca"]);

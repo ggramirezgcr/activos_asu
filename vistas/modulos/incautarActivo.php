@@ -155,14 +155,34 @@ $ocultarIncautamiento->ctrOcultarIncautamiento();
                 echo '<td>';
                 echo '<div class="btn-group">';
                 if ($value['devuelto_ea'] == '0') {
-                  echo  '<button type="button" class="btn bg-indigo" id="btnDevolverActivo_oe" idIncautamiento = "' . $value['id_ea'] . '">Devolver</button>';
+
+                  //Boton devolver
+                  echo  '<button type="button" 
+                          class="btn bg-indigo" 
+                          id="btnDevolverActivo_oe" 
+                          idIncautamiento = "' . $value['id_ea'] . '"
+                          idPorpietario_ia = "'.$value['id_funcionario'].'"
+                          placa_ia = "'.$value['placa_activo'].'"
+                          >Devolver</button>';
                 } elseif ($value['devuelto_ea'] == '1') {
                   if ($value['aceptado_ea'] == '1') {
-                    echo '<a href="#" class="btn bg-indigo" id="btnOcultarIncautamiento" idIncautamiento = "' . $value['id_ea'] . '"><i class="fa fa-eye-slash"></i></a>';
+
+                    //Boton Ocultar
+                    echo '<a href="#" class="btn bg-indigo" 
+                    id="btnOcultarIncautamiento" 
+                    idIncautamiento = "' . $value['id_ea'] . '">
+                    <i class="fa fa-eye-slash"></i></a>';
+
                   }
                 } elseif ($value['devuelto_ea'] == '2') {
                   if ($value['aceptado_ea'] == '2') {
-                    echo  '<button type="button" class="btn bg-maroon" id="btnDevolverActivo_oe" idIncautamiento = "' . $value['id_ea'] . '">Devolver nuevamente</button>';
+                    echo  '<button type="button" 
+                            class="btn bg-maroon" 
+                            id="btnDevolverActivo_oe" 
+                            idIncautamiento = "' . $value['id_ea'] . '"
+                            idPorpietario_ia = "'.$value['id_funcionario'].'"
+                            placa_ia = "'.$value['placa_activo'].'"
+                            >Devolver nuevamente</button>';
                   }
                 }
                 echo '</div>';

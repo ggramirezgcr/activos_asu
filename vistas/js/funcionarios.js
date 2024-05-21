@@ -49,16 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// ====================================================== //
-// =========== ASIGNAR SELECT2              ============= //
-// ====================================================== //
-$(window).on('load', function () {
-  $('#cmbfuncionarios').select2({});
-});
-
-
-
-
 
 $(document).ready(function () {
 
@@ -102,6 +92,8 @@ $(document).ready(function () {
           //Formulario de nuevo usuario
           $("#nuevoUsuario").val(respuesta["usuario_red_funcionario"]);
           $("#nuevoNombre").val(respuesta["nombre_funcionario"]);
+
+          $("#nuevoEmail").val(respuesta["usuario_red_funcionario"] + "" + '@ccss.sa.cr');
 
         } if (txt_usuarioRedSolEnv) {
 

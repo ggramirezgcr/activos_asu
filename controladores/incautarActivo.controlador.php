@@ -32,7 +32,7 @@ class ControladorIncautarActivo
                     );
 
                     $encautamiento = new ModeloIncautarActivo();
-                 $info  =   $encautamiento->mdlActivosIncautados($tabla, $item, $datos['idIncautamiento'], true);
+                    $info  =   $encautamiento->mdlActivosIncautados($tabla, $item, $datos['idIncautamiento'], true);
 
                     $bolBandera = false;
                     if ($info) {
@@ -43,7 +43,7 @@ class ControladorIncautarActivo
 
                         if ($info['fecha_respta_ea'] == null) {
                             $bolBandera = true;
-                            
+
                             ControladorMensajes::msj_Swal('', 'Tenemos un problema, no hemos encontrado la fecha de la repuesta que indica por parte del propietario que acepta el activo.', 'e', 'window.location = "incautarActivo";');
                         }
                     } else {
@@ -59,7 +59,7 @@ class ControladorIncautarActivo
                         } else {
                             ControladorMensajes::msj_Swal('Error', 'Error al intentar devolver el activo', 'e', 'window.location = "incautarActivo";');
                         }
-                    } 
+                    }
                 }
             }
         } catch (Error $e) {
@@ -98,9 +98,17 @@ class ControladorIncautarActivo
                         'idUser'          => $_GET['idUser']
                     );
 
+                    $datosEmail = array(
+                        'idfun' => $_GET['idPropiet'],
+                        'placa'         => $_GET['placa'],
+                        'nombre'        => $_SESSION['nombre'],
+                        'foto'          => $_SESSION['foto']
+                    );
+
                     $respuesta = ModeloIncautarActivo::mdlDevolverActivo($tabla, $datos);
 
                     if ($respuesta > 0) {
+                        ControladorHelpers::ctrProceso_envioCorreo($datosEmail, 'DEVUELTO ACTIVO INCAUTADO POR', 'Te han devuelto un activo incautado','','w');
                         ControladorMensajes::msj_Swal('', 'El activo ahora esta en proceso de devolución, por lo que hay que esperar a que el propietario lo acepte.', 's', 'window.location = "incautarActivo";');
                     } else {
                         ControladorMensajes::msj_Swal('Error', 'Error al intentar devolver el activo', 'e', 'window.location = "incautarActivo";');
@@ -126,13 +134,19 @@ class ControladorIncautarActivo
             'observacion' => $_POST['txt_Observaciones_mEA']
         );
 
-    //  $activoIncautado = ModeloIncautarActivo::mdlVerificarEquipoDisponible($tabla, 'incautador_ea', $_POST['iduser'] );
-
+        //  $activoIncautado = ModeloIncautarActivo::mdlVerificarEquipoDisponible($tabla, 'incautador_ea', $_POST['iduser'] );
+       
+        $datosEmail = array(
+            'idfun' => $_POST['idFunReceptor_mIA'],
+            'placa' => $_POST['placa_mIA'],
+            'nombre'=> $_SESSION['nombre'],
+            'foto'  => $_SESSION['foto']
+        );
 
         $respuesta = ModeloIncautarActivo::mdlNuevoIncautamiento($tabla, $datos);
 
         if ($respuesta > 0) {
-
+           ControladorHelpers::ctrProceso_envioCorreo($datosEmail, 'ACTIVO INCAUTADO POR', 'Te han incautado un activo', '', 'w');
             ControladorMensajes::msj_sweetalert('', '¡Registro exitoso!', 's', 'window.location = "incautarActivo";');
         } else {
 

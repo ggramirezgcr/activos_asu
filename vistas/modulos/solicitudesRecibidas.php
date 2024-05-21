@@ -1,6 +1,7 @@
 <?php
 if (isset($_SESSION['id'])) {
   $idUsarioLogueado = $_SESSION['id'];
+
 }
 
 ?>
@@ -35,19 +36,18 @@ if (isset($_SESSION['id'])) {
     <!-- Default box -->
     <div class="card">
 
-    <!--ENCABEZADO CARD-->
-    <div class="card-header">
-       <!-- <h1 class="card-title">Recibir activos.</h1>-->
-       <div class="callout callout-info">
-         <h5><i class="fa fa-info-circle"></i> Recibir activos.</h5>
-         <p>En esta página se mostrarán los registros de los prestamos que te han realizado y los cuales no se han devuelto a su propietario, aquí puedes aceptar, rechazar o devolver el registro del préstamo del activo que otros funcionarios te han hecho.</p>
-       </div>
+      <!--ENCABEZADO CARD-->
+      <div class="card-header">
+        <!-- <h1 class="card-title">Recibir activos.</h1>-->
+        <div class="callout callout-info">
+          <h5><i class="fa fa-info-circle"></i> Recibir activos.</h5>
+          <p>En esta página se mostrarán los registros de los prestamos que te han realizado y los cuales no se han devuelto a su propietario, aquí puedes aceptar, rechazar o devolver el registro del préstamo del activo que otros funcionarios te han hecho.</p>
+        </div>
 
       </div>
 
 
       <div class="card-body">
-
 
         <table class="table row-border table-hover dataTable dtr-inline tablas" id="tabla_SolicitudesRecibidas" with=100%>
           <thead>
@@ -80,48 +80,73 @@ if (isset($_SESSION['id'])) {
               foreach ($solicitudesRecibidas as $key => $value) {
 
                 if ($value['devuelto_sa'] == '0') {
-                 
+
                   if ($value['respta_receptor_sa'] === null || $value['respta_receptor_sa'] === 1) {
-  
+
                     if ($value['ocultar_sa'] === 0) {
-  
+
                       echo '<tr>';
-  
+
                       echo '<td>' . $value['id_sa'] . '</td>';
-  
+
                       echo '<td>' . $value['placa_activo'] . '</td>';
-  
+
                       echo '<td>' . $value['detalle_categoria'] . '</td>';
-  
+
                       echo '<td>' . $value['detalle_subcategoria'] . '</td>';
-  
+
                       echo '<td>' . $value['detalle_marca'] . '</td>';
-  
+
                       echo '<td>' . $value['nombre_funcionario'] . '</td>';
-  
-                      echo '<td>' . ($value['fecha_crea_sa'] !== null ?  date("d-m-Y h:i A", strtotime($value['fecha_crea_sa'])) : '' ) . '</td>';
+
+                      echo '<td>' . ($value['fecha_crea_sa'] !== null ?  date("d-m-Y h:i A", strtotime($value['fecha_crea_sa'])) : '') . '</td>';
 
                       echo '<td>' . ($value['fecha_respta_sa'] !== null ? date("d-m-Y h:i A", strtotime($value['fecha_respta_sa'])) : '') . '</td>';
-  
+
                       echo '<td>
                    <div class="btn-group">';
                       if ($value['respta_receptor_sa'] === null) {
-                        echo '<button type="button" class="btn bg-teal" id="btnAceptarPrestamo" idSolicitud= "' . $value['id_sa'] . '">Aceptar</button>';
-                        echo '<button type="button" class="btn bg-maroon" id="btnRechazarPrestamo" idSolicitud= "' . $value['id_sa'] . '">Rechazar</button>';
-                      }else {
-                        echo '<button type="button" class="btn bg-indigo" id="btnDevolverActivo" idSolicitud= "' . $value['id_sa'] . '">Devolver</button>';
+                        //Boton Aceptar
+                        echo '<button type="button" 
+                              class="btn bg-teal" 
+                              id="btnAceptarPrestamo" 
+                              idSolicitud= "' . $value['id_sa'] . '" 
+                              idfun="' . $value['id_funcionario'] . '" 
+                              placa="' . $value['placa_activo'] . '"
+                              >Aceptar</button>';
+
+                        //Boton Rechazar
+                        echo '<button type="button" 
+                              class="btn bg-maroon" 
+                              id="btnRechazarPrestamo" 
+                              idSolicitud= "' . $value['id_sa'] . '" 
+                              idfun="' . $value['id_funcionario'] . '" 
+                              placa="' . $value['placa_activo'] . '"
+                              >Rechazar</button>';
+
+                      } else {
+
+                        //Boton devolver
+                        echo '<button type="button" 
+                              class="btn bg-indigo" 
+                              id="btnDevolverActivo" 
+                              idSolicitud= "' . $value['id_sa'] . '" 
+                              idfun="' . $value['id_funcionario'] . '" 
+                              placa="' . $value['placa_activo'] . '"
+                              >Devolver</button>';
+
                       }
-  
-  
-  
+
+
+
                       echo  '</div>
                  </td>';
-  
+
                       echo '</tr>';
                     }
                   }
                 }
-                }
+              }
             }
 
             ?>

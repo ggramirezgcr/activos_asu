@@ -280,8 +280,8 @@ class ModeloActivos
     {
         try {
 
-           
-                $sql = "
+
+            $sql = "
                 SELECT 
                     count(detalle_categoria) cantidad,
                     detalle_categoria 
@@ -290,7 +290,7 @@ class ModeloActivos
                 WHERE responsable_activo = :valor
                 GROUP BY detalle_categoria
                 ";
-            
+
 
             $stmt = Conexion::conectar()->prepare($sql);
 
@@ -326,8 +326,8 @@ class ModeloActivos
     {
         try {
 
-            
-                $sql = "
+
+            $sql = "
                 SELECT 
                 count(detalle_categoria) cantidad, 
                 detalle_categoria 
@@ -337,7 +337,7 @@ class ModeloActivos
                 WHERE responsable_activo = :responsable_activo and emisor_sa = :emisor_sa
                 GROUP BY detalle_categoria
                 ";
-            
+
 
             $stmt = Conexion::conectar()->prepare($sql);
 
@@ -362,14 +362,14 @@ class ModeloActivos
 
 
     // ====================================================== //
-// ================== IMAGEN DEL ACTIVO ================= //
-// ====================================================== //
-public static function mdlImagenActivo($valor)
+    // ================== IMAGEN DEL ACTIVO ================= //
+    // ====================================================== //
+    public static function mdlImagenActivo($valor)
     {
         try {
 
-            
-                $sql = "
+
+            $sql = "
                 SELECT 
                     img_modelo 
                 FROM 
@@ -377,7 +377,7 @@ public static function mdlImagenActivo($valor)
                 WHERE placa_activo = :valor
                 LIMIT 1
                 ";
-            
+
 
             $stmt = Conexion::conectar()->prepare($sql);
 
@@ -398,12 +398,4 @@ public static function mdlImagenActivo($valor)
             $stmt = null;
         }
     }
-
-
-
-
-
-
-
-
 }

@@ -8,12 +8,16 @@ if (isset($_SESSION['id'])) {
 ?>
 
 <!-- // ====================================================== //
-    // ====================== CONTENIDO ===================== //
+    // ====================== MIS ACTIVOS INCAUTADOS ===================== //
     // ====================================================== // -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <input type="hidden" name="iduser" value=<?php echo $idUsarioLogueado ?>>
+
+    <input type="hidden" name="iduser" value="<?php echo $idUsarioLogueado ?>">
+    <input type="hidden" name="nombre_mAI" id="nombre_mAI" value="<?php echo $_SESSION['nombre'] ?>">
+    <input type="hidden" name="foto_mAI" id="foto_mAI" value="<?php echo $_SESSION['foto'] ?>">
+
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
@@ -106,8 +110,25 @@ if (isset($_SESSION['id'])) {
                       case '0':
                         echo '<td>';
                         echo '<div class="btn-group">';
-                        echo   '<button type="button" class="btn bg-teal" id="btn_aceptarIncautamiento" idIncautamiento="' . $value['id_ea'] . '">Aceptar</button>';
-                        echo  '<button type="button" class="btn bg-maroon" id="btn_rechazarIncautamiento" idIncautamiento="' . $value['id_ea'] . '">Rechazar</button>';
+
+                        //Boton Aceptar
+                        echo   '<button type="button" 
+                        class="btn bg-teal" 
+                        id="btn_aceptarIncautamiento" 
+                        idIncautamiento="' . $value['id_ea'] . '"
+                        idIncaut="' . $value['id_funcionario'] . '"
+                        placa_incaut="' . $value['placa_activo'] . '"
+                        >Aceptar</button>';
+
+                        //Boton Rechazar
+                        echo  '<button type="button" 
+                        class="btn bg-maroon" 
+                        id="btn_rechazarIncautamiento" 
+                        idIncautamiento="' . $value['id_ea'] . '"
+                        idIncaut="' . $value['id_funcionario'] . '"
+                        placa_incaut="' . $value['placa_activo'] . '"
+                        >Rechazar</button>';
+
                         echo '</div>';
                         echo '</td>';
                         break;
@@ -122,8 +143,24 @@ if (isset($_SESSION['id'])) {
 
                         echo '<td>';
                         echo '<div class="btn-group">';
-                        echo   '<button type="button" class="btn bg-teal" id="btn_aceptarIncautamiento" idIncautamiento="' . $value['id_ea'] . '">Aceptar</button>';
-                        echo  '<button type="button" class="btn bg-maroon" id="btn_rechazarIncautamiento" idIncautamiento="' . $value['id_ea'] . '">Rechazar</button>';
+
+                        //Boton Aceptar
+                        echo   '<button type="button" 
+                              class="btn bg-teal" 
+                              id="btn_aceptarIncautamiento"
+                              idIncautamiento="' . $value['id_ea'] . '"
+                              idIncaut="' . $value['id_funcionario'] . '"
+                              placa_incaut="' . $value['placa_activo'] . '"
+                              >Aceptar</button>';
+
+                        //Boton Rechazar
+                        echo  '<button type="button" 
+                              class="btn bg-maroon" 
+                              id="btn_rechazarIncautamiento" 
+                              idIncautamiento="' . $value['id_ea'] . '"
+                              idIncaut="' . $value['id_funcionario'] . '"
+                              placa_incaut="' . $value['placa_activo'] . '"
+                              >Rechazar</button>';
                         echo '</div>';
                         echo '</td>';
 
@@ -132,20 +169,20 @@ if (isset($_SESSION['id'])) {
                       default:
                         break;
                     }
-                  } elseif($value['devuelto_ea'] == '0') {
+                  } elseif ($value['devuelto_ea'] == '0') {
 
                     echo '<td><span class="badge bg-gray"></i>De momento incautado</span></td>'; //Respuesta
-                  }elseif ($value['devuelto_ea'] == '2') {
+                  } elseif ($value['devuelto_ea'] == '2') {
                     echo '<td><span class="badge bg-warning"></i>Lo rechazaste</span></td>'; //Respuesta
                   }
 
                   //Commentario
                   if ($value['observacion_ea'] !== '') {
-                   
+
                     echo '<td>';
-                            echo '<a href="#" class="link-black text-sm" id="popCommentIncaut" data-toggle="popover" title="Commentario" data-content="'.$value['observacion_ea'].'"><i class="fa fa-comment aria-hidden="true" mr-1"></i></a>';
+                    echo '<a href="#" class="link-black text-sm" id="popCommentIncaut" data-toggle="popover" title="Commentario" data-content="' . $value['observacion_ea'] . '"><i class="fa fa-comment aria-hidden="true" mr-1"></i></a>';
                     echo '</td>';
-                  }else {
+                  } else {
                     echo '<td></td>';
                   }
 

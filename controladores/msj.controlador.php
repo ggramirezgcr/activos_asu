@@ -121,7 +121,7 @@ class ControladorMensajes
         if ($pausar) {
             $script .= 'setTimeout(function() {
                         ' . $value . '
-                    }, 2000);</script>';
+                    }, 300);</script>';
         }else {
             $script .= 'setTimeout(function() {
                 ' . $value . '

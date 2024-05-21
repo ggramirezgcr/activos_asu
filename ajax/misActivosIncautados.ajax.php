@@ -2,6 +2,10 @@
 
 require_once "../controladores/misActivosIncautados.controlador.php";
 require_once "../modelos/misActivosIncautados.modelo.php";
+require_once "../Controladores/helpers.controlador.php";
+require_once "../Controladores/email.controlador.php";
+require_once "../modelos/usuarios.modelo.php";
+
 
 class ajaxClsMisActivosIncautados
 {
@@ -12,7 +16,15 @@ class ajaxClsMisActivosIncautados
             'idea'        => $valor,
             'respuesta'   => $valor2
         );
-        $respuesta = ControladormisActivosIncautados::ctrRespuestaIncautamiento($datos);
+
+        $datosEmail = array(
+            'idfun' => $_POST['incautador'],
+            'placa' => $_POST['placa'],
+            'nombre'=> $_POST['nombre'],
+            'foto'  => $_POST['foto']
+        );
+
+        $respuesta = ControladormisActivosIncautados::ctrRespuestaIncautamiento($datos, $datosEmail);
 
         echo json_encode($respuesta, JSON_FORCE_OBJECT);
     } // /. ajaxAceptarIncautamiento

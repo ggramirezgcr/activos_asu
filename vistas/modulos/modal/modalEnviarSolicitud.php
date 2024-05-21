@@ -61,11 +61,13 @@
                <div class="row mt-3 mb-2">
 
                  <input type="hidden" name="txt_codigoPlaca" id="txt_codigoPlaca">
+                 <input type="hidden" name="txt_placaActivo_mES" id="txt_placaActivo_mES">
 
                  <!--                 PLACA                 -->
                  <div class="col-sm-3">
                    <label for="txt_Placa">Placa</label>
                    <input type="text" id="txt_Placa" class="form-control" readonly=true>
+                   
                  </div>
 
                  <!--                 CATEGORIA                 -->

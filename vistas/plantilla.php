@@ -83,7 +83,8 @@ $_SESSION["timeout"] = time();
 if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
 
     //echo '<body class="hold-transition sidebar-mini sidebar-collapse layout-fixed layout-navbar-fixed">';
-    echo '<body class="sidebar-mini layout-navbar-fixed layout-fixed sidebar-collapse">';
+    //echo '<body class="sidebar-mini layout-navbar-fixed layout-fixed sidebar-collapse">';
+    echo '<body class="control-sidebar-slide-open layout-navbar-fixed layout-fixed" style="height: auto;">';
 
     // - <!-- Site wrapper -->  //
     echo  '<div class="wrapper">';
@@ -116,7 +117,7 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
         ) {
 
             include "modulos/" . $_GET["ruta"] . ".php";
-
+            require_once "vistas/modulos/modal/modalLoading.php";
 
             // ##################################################################### //
             // ################### // - <!--Incluir los js-->  // ################## //

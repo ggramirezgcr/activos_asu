@@ -9,6 +9,8 @@ require_once "controladores/solicitudesRecibidas.controlador.php";
 require_once "controladores/activos.controlador.php";
 require_once "controladores/incautarActivo.controlador.php";
 require_once "controladores/misActivosIncautados.controlador.php";
+require_once "controladores/email.controlador.php";
+require_once "controladores/helpers.controlador.php";
 
 
 require_once "modelos/usuarios.modelo.php";

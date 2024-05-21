@@ -55,7 +55,7 @@ $(document).on('click', "#btnOcultarSolicitud", async function () {
  /**
   * Valida el formulario de nueva solicitud
   */
- function validarFormulario() {
+/* function validarFormulario() {
 
 
     // Obtener valores de los campos
@@ -83,6 +83,6 @@ $(document).on('click', "#btnOcultarSolicitud", async function () {
 
     // Si la validación pasa, puedes enviar el formulario
     return true;
-}
+}*/
 
 

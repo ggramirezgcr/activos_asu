@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ~~~~~~~~~~~~ FIN VARIABLES ~~~~~~~~~~~~ //
 
+    
+
     $('#modalEnviarPrestamo').on('shown.bs.modal', function () {
 
         //  Realizar alguna acción cuando el modal se esté cerrando  //

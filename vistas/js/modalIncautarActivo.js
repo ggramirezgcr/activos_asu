@@ -98,6 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     //Limpiar campos
                     $("#txt_codigoPlaca_mEA").val("");
+                    $("#idFunReceptor_mIA").val("");
+                    $("#placa_mIA").val("");
                     $("#txt_Placa_mEA").val("");
                     $("#txt_Propietario_mEA").val("");
                     $('#txt_categoria_mEA').val("");
@@ -115,7 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     /*Mostrar datos*/
                     $("#txt_codigoPlaca_mEA").val(respuesta['id_activo']);
+                    $("#idFunReceptor_mIA").val(respuesta['id_funcionario']);
                     $("#txt_Placa_mEA").val(respuesta["placa_activo"]);
+                    $("#placa_mIA").val(respuesta['placa_activo']);
                     $("#txt_Propietario_mEA").val(respuesta['nombre_funcionario']);
                     $('#txt_categoria_mEA').val(respuesta["detalle_categoria"]);
                     $('#txt_Marca_mEA').val(respuesta["detalle_marca"]);

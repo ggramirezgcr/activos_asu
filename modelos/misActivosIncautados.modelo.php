@@ -21,6 +21,7 @@ class ModelomisActivosIncautados
                     categoria.detalle_categoria,
                     subcategoria.detalle_subcategoria, 
                     marca.detalle_marca,
+                    funcionario.id_funcionario,
                     funcionario.nombre_funcionario, 
                     fecha_ea, 
                     fecha_devol_ea, 

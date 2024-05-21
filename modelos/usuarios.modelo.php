@@ -23,7 +23,7 @@ class ModeloUsuarios
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE usuario <> 'root'");
 
             $stmt->execute();
 
@@ -73,8 +73,8 @@ class ModeloUsuarios
     static public function mdlIngresarUSuario($tabla, $datos)
     {
         $stmt = Conexion::conectar()->prepare(
-            "INSERT INTO $tabla(id ,nombre, usuario, password, perfil, foto, estado)
-            VALUES (:id, :nombre, :usuario, :password, :perfil, :ruta, :estado)"
+            "INSERT INTO $tabla(id ,nombre, usuario, password, perfil, foto, estado, email_usuario)
+            VALUES (:id, :nombre, :usuario, :password, :perfil, :ruta, :estado, :email)"
         );
 
         $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
@@ -84,9 +84,17 @@ class ModeloUsuarios
         $stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
         $stmt->bindParam(":ruta", $datos["foto"], PDO::PARAM_STR);
         $stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);
+        $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
 
         if ($stmt->execute()) {
-            return 'ok';
+          if  ($stmt->rowCount() > 0){
+              return 'ok';
+
+          }else {
+            return 'false';
+          }
+
+
         } else {
             return 'error';
         };

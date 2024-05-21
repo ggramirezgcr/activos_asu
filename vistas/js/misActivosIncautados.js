@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     $(function () {
         $('#popCommentIncaut').popover({
-                trigger: 'hover',
+            trigger: 'hover',
             delay: { "show": 100, "hide": 500 }
         })
     })
@@ -71,12 +71,25 @@ $(document).ready(function () {
     // ============== BTN ACEPTAR INCAUTAMIENTO ============= //
     // ====================================================== //
     $(document).on('click', "#btn_aceptarIncautamiento", async function () {
+debugger;
+        //inicializar modal loading
+        $('#loadingModal').modal('show');
 
         var idIncautamiento = $(this).attr('idIncautamiento');
+        var idIncaut = $(this).attr('idIncaut');
+        var placa = $(this).attr('placa_incaut');
+        var nombre = document.getElementById('nombre_mAI').value;
+        var foto = document.getElementById('foto_mAI').value;
+
         var formData = new FormData();
 
         formData.append('idIncautamiento', idIncautamiento);
         formData.append('aceptarIncaut', true);
+        formData.append('incautador', idIncaut);
+        formData.append('placa', placa);
+        formData.append('nombre', nombre);
+        formData.append('foto', foto);
+
 
         const respuesta = await
             fetch("ajax/misActivosIncautados.ajax.php", {
@@ -96,7 +109,8 @@ $(document).ready(function () {
             window.location = "misActivosIncautados";
         }
 
-
+        // Ocultar el modal después del proceso
+        $('#loadingModal').modal('hide');
 
     })
 
@@ -107,10 +121,19 @@ $(document).ready(function () {
     // ====================================================== //
     $(document).on('click', "#btn_rechazarIncautamiento", async function () {
         var idIncautamiento = $(this).attr('idIncautamiento');
+        var idIncaut = $(this).attr('idIncaut');
+        var placa = $(this).attr('placa_incaut');
+        var nombre = document.getElementById('nombre_mAI').value;
+        var foto = document.getElementById('foto_mAI').value;
+
         var formData = new FormData();
 
         formData.append('idIncautamiento', idIncautamiento);
         formData.append('rechazarIncaut', true);
+        formData.append('incautador', idIncaut);
+        formData.append('placa', placa);
+        formData.append('nombre', nombre);
+        formData.append('foto', foto);
 
         const respuesta = await
             fetch("ajax/misActivosIncautados.ajax.php", {

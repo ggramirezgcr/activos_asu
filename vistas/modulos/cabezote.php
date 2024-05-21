@@ -36,6 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // ====================================================== //-->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light text-sm">
 
+<input type="hidden" name="nombreFun" id="nombreFun" value="<?= isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '' ?>">
+<input type="hidden" name="fotoFun" id="fotoFun" value="<?= isset($_SESSION['foto']) ? $_SESSION['foto'] : '' ?>">
+
+
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -88,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
               ?>
 
-            </div>
+              </div>
 
 
             <input type="file" class="nuevaFoto" accept="image/*" name="editarFoto_config" id="editarFoto_config" onchange="this.form.submit()" style="display: none">

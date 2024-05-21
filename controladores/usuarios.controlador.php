@@ -289,7 +289,8 @@ class ControladorUsuarios
                     "password" => $encriptar,
                     "perfil"   => $_POST["nuevoPerfil"],
                     "foto"     => $ruta,
-                    "estado"   => 0
+                    "estado"   => 1,
+                    "email"    => $_POST["nuevoEmail"]
                 );
 
                 $respuesta = ModeloUsuarios::mdlIngresarUSuario($tabla, $datos);
@@ -305,6 +306,10 @@ class ControladorUsuarios
                     }
                     });
                     </script>';
+
+                    //Enviar correo
+                    $body = self::htmlBodyUsuario($_POST["nuevoNombre"], $_POST["nuevoUsuario"], $_POST["nuevoPassword"], 'USUARIO CREADO');
+                    ControladorEmail::ctrEnviarEmail('Usuario creado', $_POST["nuevoEmail"], $body );
                 }
             } else {
                 echo '<script>
@@ -529,8 +534,20 @@ class ControladorUsuarios
             $datos = $_GET["idUsuario"];
 
             if ($_GET["fotoUsuario"] != "") {
-                unlink($_GET["fotoUsuario"]);
-                rmdir('vistas/img/usuarios/' . $_GET["usuario"]);
+                $fotoUsuario = $_GET['fotoUsuario'];
+                 $directorio = rtrim(dirname($_GET['fotoUsuario']), DIRECTORY_SEPARATOR)  ;
+                //Validar si archivo existe
+                if (file_exists($fotoUsuario)) {
+                    if (unlink($fotoUsuario)) {
+                      //Comprobar directorio
+                        if (is_dir($directorio)) {
+                        rmdir($directorio);
+                       }
+                    }
+                }
+                
+              //  unlink($_GET["fotoUsuario"]);
+              //  rmdir('vistas/img/usuarios/' . $_GET["usuario"]);
             }
 
             $respuesta = ModeloUsuarios::mdlBorrarUsuario($tabla, $datos);
@@ -599,6 +616,14 @@ class ControladorUsuarios
             if (empty($_POST["nuevoPerfil"])) {
                 $errores[] = "Debe seleccionar un perfil de usuario.";
                 self::ctrMostrarMensaje("Debe seleccionar un perfil de usuario.", "Error en el perfil");
+            }
+
+            #validar email
+            if (empty($_POST['nuevoEmail'])) {
+                if (!filter_var($_POST['nuevoEmail'], FILTER_VALIDATE_EMAIL)) {
+                    $errores[] = "Email incorrecto";
+                    self::ctrMostrarMensaje("Formato de correo no valido", 'Error');
+                }
             }
 
 
@@ -856,6 +881,106 @@ class ControladorUsuarios
                     ControladorMensajes::msj_Swal("", "Error al actualizar imagen.", "e", 'window.location = "inicio";');
                 }
             }
+        }
+    }
+
+
+    // ====================================================== //
+    // ============= SANITIZAR CADENA PARA HTML ============= //
+    // ====================================================== //
+    /**
+     * Devuelve una cadena sanitizada para html
+     *
+     * @param [string] $valor
+     * @return void
+     */
+    static function sanitizarCadena_paraHTML($valor)
+    {
+        try {
+            return htmlentities($valor, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        } catch (\Throwable $e) {
+            return '';
+        }
+    }
+
+/**
+ * Crea el body html del email que se envia 
+ *
+ * @param string $nombre : Nombre funcionario
+ * @param string $usuario : Usuario de red
+ * @param string $pass : Contraseña
+ * @param string $titulo : Titulo del encabezado
+ * @return void
+ */
+    static function htmlBodyUsuario($nombre, $usuario, $pass, $titulo)
+    {
+        try {
+
+            $nombre = ControladorHelpers::ctrSanitizarCadena_paraHTML($nombre);
+            $titulo = ControladorHelpers::ctrSanitizarCadena_paraHTML($titulo);
+
+
+
+            $html = '
+            <html>
+<head>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            background-repeat: no-repeat;
+            height: 100%; /* Cambiado a altura automática */
+            min-height: 100vh; /* Para garantizar que ocupe al menos el 100% del alto de la ventana del navegador */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="prueba_cls" style="padding-bottom:80px;margin:0; background-color:#f7fafc">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td align="center">
+                <section class="contenedor" style="overflow: hidden; border-radius: 10px; padding:30px">
+                    <div class="card" style="width: 400px; height:auto; border-radius: 10px; box-shadow: 10px 20px 10px rgba(0, 0, 0, 0.442); background-color: #231e39; color: #b3b8cd;">
+                        <div class="card__sup" style="display: flex; flex-direction: column; align-items: center; height: 400px; width: 100%; margin: 30px 0px 20px;">
+                            <h1 class="Position" style="display: block; position: relative; font-size: 1rem; background-color: #00b2e6; padding: 10px; border-radius: 9px 0; color: #231e39; top: -20px; left: 0px; margin: 10px 0px 10px">USUARIO CREADO</h1>
+                            
+                            <div style="font-size: 1.1rem; line-height: normal; font-weight: 550; padding-top: 14px;"   >' . $nombre . '</div>
+                            <div style="font-size: 0.9rem; padding-top: 4px;">Are de Salud Upala</div>
+                            <div style="font-size: 1rem; text-align: center; padding: 15px 5px 0px; margin: 5px; font-weight: bold;">Usuario </div>
+                            <div style="font-size: 1rem; text-align: center; padding: 0px 50px; letter-spacing: 0.8pt; color: #febb0b; font-weight: bold; font-size: 1.5rem; ">'.$usuario.'</div>
+                            <div style="display: flex; flex-direction: row; align-items: center; font-size: 0.9rem; padding-top: 4px;"><h3>Contrase&ntildea:</h3><span style="margin-left: 8px; font-size: 0.9rem;">'.$pass.'</span></div>
+                            
+                            <div class="btns__card" style="height: 40px; margin-top: 25px;">
+                                <a href="https://www.stecmacr.com/asupala" class="btn__msj" style="border: 2px solid #c400d7; text-decoration: none; color: #f2f2f2; padding: 10px 20px; font-size: 0.9rem; text-align: center; font-weight: 400; border-radius: 5px; background: #c400d7 !important; ;"><span>Ingresar</span></a>
+                            </div>
+                        </div>
+                        <div class="card__out" style="width: 100%; background-color: #1f1a36; padding: 20px 10px; overflow: hidden; border-radius: 0px 0px 10px 10px">
+                            <div class="text__skill__card" style="font-size: 0.9rem; letter-spacing: -0.5pt;">Informaci&oacuten</div>
+                            <div class="skills__card" style="padding: 10px 15px; height: 100px; width: 100%;">
+                                <h3 style="display: inline-block; font-weight: 300; font-size: .7rem; padding: 3px; margin-top: 5px; margin-right: 3px; border: 1px solid #403a5a;">El contenido de este email es para uso esclusivo de los funcionarios del area de salud de Upala.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </td>
+        </tr>
+    </table>
+    </div>
+</body>
+
+</html>
+            ';
+
+            return $html;
+        } catch (\Throwable $th) {
         }
     }
 }
