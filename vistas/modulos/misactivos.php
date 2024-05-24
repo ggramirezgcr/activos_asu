@@ -44,7 +44,7 @@ if (isset($_SESSION['id'])) {
         <h2 class="card-title">Mis activos.</h2>
       </div>
           <div class="card-header border-0">
-            <table class="table dataTable dtr-inline collapsed tablas" id="tabla_activos">
+            <table class="table dataTable dtr-inline collapsed tablas" id="tabla_misactivos">
               <thead>
                 <tr>
                   <th>id</th>

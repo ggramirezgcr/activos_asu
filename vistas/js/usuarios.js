@@ -1,4 +1,70 @@
 
+document.addEventListener('DOMContentLoaded', function () {
+
+
+
+  // ====================================================== //
+  // =================== TABLA USUARIOS =================== //
+  // ====================================================== //
+
+  try {
+    var tablaUsuarios = $("#tablaUsuarios");
+
+    if (tablaUsuarios !== null) {
+      tablaUsuarios.DataTable({
+        columnDefs: [
+          { targets: [0], orderData: [0, 1],  searchable: false }
+        ],
+        dom: 'B<"row"<"col-sm-6 mt-2"l><"col-sm-6"f>>rtip',
+        buttons: [
+          {
+            extend: 'excelHtml5',
+            text: '<i class="fas fa-file-excel"></i>',
+            titleAttr: 'Exportar a Excel',
+            title: 'Usuarios.',
+            className: 'btn btn-success',
+            exportOptions: {
+              columns: [1, 2, 3, 4, 5, 6, 7]
+            }
+          },
+          {
+            extend: 'pdfHtml5',
+            text: '<i class="fas fa-file-pdf"></i>',
+            titleAttr: 'Exportar a PDF',
+            className: 'btn btn-danger',
+            title: 'Usuarios.',
+            exportOptions: {
+              columns: [1, 2, 3, 4, 5, 6, 7]
+            }
+          },
+          {
+            extend: 'print',
+            text: '<i class="fas fa-print"></i>',
+            titleAttr: 'Imprimir',
+            className: 'btn btn-info',
+            title: 'Usuarios.',
+            exportOptions: {
+              columns: [1, 2, 3, 4, 5, 6, 7],
+              orientation: 'landscape'
+            },
+
+          }
+
+        ]
+      });
+    }
+
+  } catch (error) {
+
+  }
+
+
+
+
+})// /. FIN 'DOMContentLoaded'
+
+
+
 // ====================================================== //
 // =========== ASIGNAR SELECT2              ============= //
 // ====================================================== //
@@ -217,11 +283,11 @@ $(document).on("click", ".btnIncautar", function () {
   let incautar = $(this).attr('incautar');
   let datos = new FormData();
 
-if (incautar == "1") {
-  incautar = "0";
-}else{
-  incautar ="1";
-}
+  if (incautar == "1") {
+    incautar = "0";
+  } else {
+    incautar = "1";
+  }
 
   datos.append("iduser", idUsuario);
   datos.append("incautar", incautar);
@@ -438,7 +504,7 @@ function obtenerUsuarioLogueado() {
       console.log("***Error en la llamada Fetch de obtenerUsuarioLogueado***:", error);
       throw error; // Propagar el error para que se maneje externamente si es necesario
     });
-}
+}//. fin obtenerUsuarioLogueado
 
 
 

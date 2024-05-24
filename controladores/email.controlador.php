@@ -34,6 +34,9 @@ class ControladorEmail
         }
 
       //  $asunto = self::ctrSanitizarCadena_paraHTML($asunto);
+      if ($para == null && $para == '') {
+        return;
+      }
 
         $mail = new PHPMailer(true);
         try {

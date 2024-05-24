@@ -1,11 +1,12 @@
+var spinnerContainer = document.getElementById('spinner-container');
 
 
 $(document).ready(function () {
 
     $(document).on('click', '#btnDevolverActivo_oe', function () {
         try {
-            //inicializar modal loading
-            $('#loadingModal').modal('show');
+            
+            spinnerContainer.style.display = 'flex';
 
             let idEncautamiento = $(this).attr('idIncautamiento');
             let idPropietario = $(this).attr('idPorpietario_ia');
@@ -19,8 +20,8 @@ $(document).ready(function () {
         } catch (error) {
 
         }finally{
-            // Ocultar el modal después del proceso
-            $('#loadingModal').modal('hide');
+            spinnerContainer.style.display = 'none';
+       spinnerContainer = null;
         }
 
 

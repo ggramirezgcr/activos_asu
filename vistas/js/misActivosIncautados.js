@@ -1,3 +1,5 @@
+var spinnerContainer = document.getElementById('spinner-container');
+
 
 $(document).ready(function () {
 
@@ -71,46 +73,64 @@ $(document).ready(function () {
     // ============== BTN ACEPTAR INCAUTAMIENTO ============= //
     // ====================================================== //
     $(document).on('click', "#btn_aceptarIncautamiento", async function () {
-debugger;
-        //inicializar modal loading
-        $('#loadingModal').modal('show');
 
-        var idIncautamiento = $(this).attr('idIncautamiento');
-        var idIncaut = $(this).attr('idIncaut');
-        var placa = $(this).attr('placa_incaut');
-        var nombre = document.getElementById('nombre_mAI').value;
-        var foto = document.getElementById('foto_mAI').value;
-
-        var formData = new FormData();
-
-        formData.append('idIncautamiento', idIncautamiento);
-        formData.append('aceptarIncaut', true);
-        formData.append('incautador', idIncaut);
-        formData.append('placa', placa);
-        formData.append('nombre', nombre);
-        formData.append('foto', foto);
-
-
-        const respuesta = await
-            fetch("ajax/misActivosIncautados.ajax.php", {
-                method: "POST",
-                body: formData,
-                cache: "no-cache"
-            });
-
-        if (!respuesta.ok) {
-            throw { ok: false, msj: "error 404" };
+        if (spinnerContainer) {
+            spinnerContainer.style.display = 'flex';
         }
 
-        const datos_devueltos = await respuesta.json();
 
-        //Controla que se haya afectado filas en la bd
-        if (datos_devueltos == '1') {
-            window.location = "misActivosIncautados";
+        try {
+
+            var idIncautamiento = $(this).attr('idIncautamiento');
+            var idIncaut = $(this).attr('idIncaut');
+            var placa = $(this).attr('placa_incaut');
+            var nombre = document.getElementById('nombre_mAI').value;
+            var foto = document.getElementById('foto_mAI').value;
+
+            var formData = new FormData();
+
+            formData.append('idIncautamiento', idIncautamiento);
+            formData.append('aceptarIncaut', true);
+            formData.append('incautador', idIncaut);
+            formData.append('placa', placa);
+            formData.append('nombre', nombre);
+            formData.append('foto', foto);
+
+
+            const respuesta = await
+                fetch("ajax/misActivosIncautados.ajax.php", {
+                    method: "POST",
+                    body: formData,
+                    cache: "no-cache"
+                });
+
+            if (!respuesta.ok) {
+                throw { ok: false, msj: "error 404" };
+            }
+
+            const datos_devueltos = await respuesta.json();
+
+            //Controla que se haya afectado filas en la bd
+            if (datos_devueltos == '1') {
+                window.location = "misActivosIncautados";
+            }
+
+        } catch (error) {
+
+            alert(error);
+
+            //Ocultamos spiner
+            if (spinnerContainer) {
+                spinnerContainer.style.display = 'none';
+            }
+
+
+        } finally {
+            //Ocultamos spiner
+            if (spinnerContainer) {
+                spinnerContainer.style.display = 'none';
+            }
         }
-
-        // Ocultar el modal después del proceso
-        $('#loadingModal').modal('hide');
 
     })
 
@@ -120,39 +140,65 @@ debugger;
     // ============= BTN RECHAZAR INCAUTAMIENTO ============= //
     // ====================================================== //
     $(document).on('click', "#btn_rechazarIncautamiento", async function () {
-        var idIncautamiento = $(this).attr('idIncautamiento');
-        var idIncaut = $(this).attr('idIncaut');
-        var placa = $(this).attr('placa_incaut');
-        var nombre = document.getElementById('nombre_mAI').value;
-        var foto = document.getElementById('foto_mAI').value;
 
-        var formData = new FormData();
-
-        formData.append('idIncautamiento', idIncautamiento);
-        formData.append('rechazarIncaut', true);
-        formData.append('incautador', idIncaut);
-        formData.append('placa', placa);
-        formData.append('nombre', nombre);
-        formData.append('foto', foto);
-
-        const respuesta = await
-            fetch("ajax/misActivosIncautados.ajax.php", {
-                method: "POST",
-                body: formData,
-                cache: "no-cache"
-            });
-
-        if (!respuesta.ok) {
-            throw { ok: false, msj: "error 404" };
+        if (spinnerContainer) {
+            spinnerContainer.style.display = 'flex';
         }
 
-        const datos_devueltos = await respuesta.json();
+       
+        try {
 
-        //Controla que se haya afectado filas en la bd
-        if (datos_devueltos == '1') {
-            window.location = "misActivosIncautados";
+            var idIncautamiento = $(this).attr('idIncautamiento');
+            var idIncaut = $(this).attr('idIncaut');
+            var placa = $(this).attr('placa_incaut');
+            var nombre = document.getElementById('nombre_mAI').value;
+            var foto = document.getElementById('foto_mAI').value;
+    
+            var formData = new FormData();
+    
+            formData.append('idIncautamiento', idIncautamiento);
+            formData.append('rechazarIncaut', true);
+            formData.append('incautador', idIncaut);
+            formData.append('placa', placa);
+            formData.append('nombre', nombre);
+            formData.append('foto', foto);
+    
+            const respuesta = await
+                fetch("ajax/misActivosIncautados.ajax.php", {
+                    method: "POST",
+                    body: formData,
+                    cache: "no-cache"
+                });
+    
+            if (!respuesta.ok) {
+                throw { ok: false, msj: "error 404" };
+            }
+    
+            const datos_devueltos = await respuesta.json();
+    
+            //Controla que se haya afectado filas en la bd
+            if (datos_devueltos == '1') {
+                window.location = "misActivosIncautados";
+            }
+
+
+
+        } catch (error) {
+
+            alert(error);
+            
+            //Ocultamos spiner
+            if (spinnerContainer) {
+                spinnerContainer.style.display = 'none';
+            }
+
+        } finally {
+
+            //Ocultamos spiner
+            if (spinnerContainer) {
+                spinnerContainer.style.display = 'none';
+            }
         }
-
 
 
     })

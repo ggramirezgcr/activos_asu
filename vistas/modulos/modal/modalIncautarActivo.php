@@ -40,7 +40,7 @@
 
             <div class="card-body">
 
-              <h5 class=" mb-2">Incautar activo.</h5>
+              <h5 class=" mb-2">Confiscar activo.</h5>
               <hr>
 
               <!--Fila boton escanear QR-->
@@ -153,7 +153,7 @@
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         <input type="hidden" name="iduser" value="<?php echo $idUsarioLogueado;  ?>">
-        <button type="submit" id="btnGuardarIncautamiento" name="btnGuardarIncautamiento" class="btn btn-primary" pattern="[a-zA-Z0-9\s,.]+" disabled>Incautar activo</button>
+        <button type="submit" id="btnGuardarIncautamiento" name="btnGuardarIncautamiento" class="btn btn-primary" pattern="[a-zA-Z0-9\s,.]+" disabled>Confiscar activo</button>
       </div>
     </div>
     <!-- /.modal-content -->

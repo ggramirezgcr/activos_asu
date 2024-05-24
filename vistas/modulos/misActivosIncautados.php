@@ -21,12 +21,12 @@ if (isset($_SESSION['id'])) {
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Mis activos encautados.</h1>
+          <h1>Mis activos confiscados.</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="inicio">Inicio</a></li>
-            <li class="breadcrumb-item active">Mis activos encautados.</li>
+            <li class="breadcrumb-item active">Mis activos confiscados.</li>
           </ol>
         </div>
       </div>
@@ -43,8 +43,8 @@ if (isset($_SESSION['id'])) {
       <!--ENCABEZADO CARD-->
       <div class="card-header">
         <div class="callout callout-info">
-          <h5><i class="fa fa-info-circle"></i> Mis activos incautados.</h5>
-          <p>En este módulo encontrara todos los activos incautados por algún funcionario autorizado.</p>
+          <h5><i class="fa fa-info-circle"></i> Mis activos confiscados.</h5>
+          <p>En este módulo encontrara todos los activos confiscados por algún funcionario autorizado.</p>
         </div>
       </div>
 
@@ -68,7 +68,7 @@ if (isset($_SESSION['id'])) {
               <th>Categoria</th>
               <th>Subcategoria</th>
               <th>Marca</th>
-              <th>Propietario</th>
+              <th>Confiscado por</th>
               <th>Fecha Encautado</th>
               <th>Accion</th>
               <th></th>

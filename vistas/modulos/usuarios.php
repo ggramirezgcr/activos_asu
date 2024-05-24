@@ -60,7 +60,7 @@ if (isset($_SESSION["perfil"])) {
         <!--table table-bordered table-hover dataTable dtr-inline-->
 
         <!--table-bordered table-hover dataTable dtr-inline responsive  -->
-        <table class="table row-border table-hover dataTable dtr-inline tablas" id="tablas" with=100%>
+        <table class="table row-border table-hover dataTable dtr-inline tablas" id="tablaUsuarios">
           <thead>
             <tr>
               <th style="width:10%">#</th>
@@ -74,9 +74,9 @@ if (isset($_SESSION["perfil"])) {
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="contenido_tabla">
 
-            <?php
+          <?php
             $item = null;
             $valor = null;
 
@@ -86,7 +86,7 @@ if (isset($_SESSION["perfil"])) {
             foreach ($usuarios as $key => $value) {
 
 
-              echo '<tr class="odd">
+              echo '<tr>
                 
                 <td dtr-control sorting_1>' . ($key + 1) . '</td>
                 

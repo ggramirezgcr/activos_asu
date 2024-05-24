@@ -4,13 +4,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
+//dropdownParent: $('#modalEnviarPrestamo'),
+//dropdownParent: $('.container-fluid'),
 
 $(document).ready(function () {
     let selectFocused = false;
 
-    $('.select2').select2({
-        dropdownParent: $('#modalEnviarPrestamo')
+    $('#cmbfuncionarios_mES').select2({
+        dropdownParent: $('#modalEnviarPrestamo'),
+        dropdownAutoWidth: true,
+        dropdownPosition: 'below'
     });
 
 

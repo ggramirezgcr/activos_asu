@@ -43,7 +43,7 @@
 
                <div class="row">
                  <!--<label class="col-sm-2 col-form-label">N° Placa</label>-->
-                 <div class="col-sm-3">
+                 <div class="col-sm-6">
                    <div class="input-group input-group-sm">
                      <input type="text" id="txt_placaBuscar" class="form-control" pattern="[0-9]+" placeholder="Buscar placa..">
                      <span class="input-group-append">
@@ -144,7 +144,7 @@
                  <!--ENTRADA USUARIO-->
 
                  <div class="col-sm-6">
-                   <div class="form-group">
+                   <div class="form-group" style="position: relative;">
                      <label for="cmbfuncionarios_mES">Funcionario</label>
                      <!--class="select2 select2-container select2-container--default select2-container--below select2-container--focus"-->
                      <select name="cmbfuncionarios_mES" id="cmbfuncionarios_mES" class="select2" style="width : 100%">
@@ -173,7 +173,7 @@
                <!--Fila observaciones-->
                <div class="form-group">
                  <label for="txt_Observaciones">Observaciones</label>
-                 <textarea class="form-control" id="txt_Observaciones" maxlength="499" name="txt_Observaciones" rows="3" placeholder="Enter ..."></textarea>
+                 <textarea class="form-control" id="txt_Observaciones" maxlength="499" name="txt_Observaciones" rows="5" placeholder="Enter ..."></textarea>
                </div>
 
                </br>
@@ -187,7 +187,7 @@
        <div class="modal-footer justify-content-between">
          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
          <input type="hidden" name="iduser" value="<?php echo $idUsarioLogueado;  ?>">
-         <button type="submit" id="submitGuardarSolicitud" name="submitGuardarSolicitud" class="btn btn-primary">Guardar</button>
+         <button type="submit" id="submitGuardarSolicitud" name="submitGuardarSolicitud" class="btn btn-primary">Prestar Activo</button>
        </div>
      </div>
      <!-- /.modal-content -->

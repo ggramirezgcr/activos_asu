@@ -1,24 +1,26 @@
+var spinnerContainer = document.getElementById('spinner-container');
+
 
 async function Buscar_activo(strPlaca, callback) {
   try {
-      let datos = new FormData();
+    let datos = new FormData();
 
-      datos.append("placa", strPlaca);
-      datos.append("consultar", true);
+    datos.append("placa", strPlaca);
+    datos.append("consultar", true);
 
-      const respuesta = await // Configurar la solicitud Fetch
+    const respuesta = await // Configurar la solicitud Fetch
       fetch("ajax/activos.ajax.php", {
         method: "POST",
         body: datos,
         cache: "no-cache"
       });
 
-      if (!respuesta.ok) {
-        throw{ ok: false, msj:"error 404"};
-      }
+    if (!respuesta.ok) {
+      throw { ok: false, msj: "error 404" };
+    }
 
-      const datos_devueltos = await respuesta.json();
-      callback(datos_devueltos);
+    const datos_devueltos = await respuesta.json();
+    callback(datos_devueltos);
 
   } catch (error) {
     console.log(error);
@@ -74,7 +76,7 @@ $(document).ready(function () {
 
 
 
- 
+
 
 
   // ====================================================== //
@@ -146,6 +148,10 @@ $(document).ready(function () {
   // ================== CONSULTAR ACTIVO ================== //
   // ====================================================== //
   $(document).on("click", "#btnBuscarActivoMCA", function () {
+
+    var spinnerContainer = document.getElementById('spinner-container');
+    spinnerContainer.style.display = 'flex';
+
     let placa = document.getElementById("txt_placaBuscarMCA").value;
     let datos = new FormData();
 
@@ -205,6 +211,9 @@ $(document).ready(function () {
       })
       .catch(function (error) {
         console.log("***Error***:", error);
+      }).finally(function () {
+        spinnerContainer.style.display = 'none';
+        spinnerContainer = null;
       });
 
   });
@@ -213,79 +222,91 @@ $(document).ready(function () {
   // ====================================================== //
   // ================== CONSULTAR ACTIVO ================== //
   // ====================================================== //
- /* $(document).on("click", "#btnBuscarActivo_mEA", function () {
-   /~ debugger;~/
-    let placa = document.getElementById("txt_placaBuscar_mEA").value;
-    let datos = new FormData();
-
-    datos.append("placa", placa);
-    datos.append("consultar", true);
-
-    //Limpiar campos
-    $("#txt_codigoPlaca_mEA").val("");
-    $("#txt_Placa_mEA").val("");
-    $("#txt_Propietario_mEA").val("");
-    $('#txt_categoria_mEA').val("");
-    $('#txt_Marca_mEA').val("");
+  /* $(document).on("click", "#btnBuscarActivo_mEA", function () {
+    /~ debugger;~/
+     let placa = document.getElementById("txt_placaBuscar_mEA").value;
+     let datos = new FormData();
+ 
+     datos.append("placa", placa);
+     datos.append("consultar", true);
+ 
+     //Limpiar campos
+     $("#txt_codigoPlaca_mEA").val("");
+     $("#txt_Placa_mEA").val("");
+     $("#txt_Propietario_mEA").val("");
+     $('#txt_categoria_mEA').val("");
+     $('#txt_Marca_mEA').val("");
+     
+     $('#txt_detalle_mEA').val("");
+     $('#txt_subCategoriaMCA').val("");
     
-    $('#txt_detalle_mEA').val("");
-    $('#txt_subCategoriaMCA').val("");
-   
-    $('#txt_placaBuscarMCA').val("");
-
-
-
-    // Configurar la solicitud Fetch
-    fetch("ajax/activos.ajax.php", {
-      method: "POST",
-      body: datos,
-      cache: "no-cache",
-      headers: {
-        // Puedes ajustar los encabezados según tus necesidades
-        // En este caso, estamos enviando datos en formato FormData
-      },
-    })
-      .then(function (response) {
-        if (!response.ok) {
-          throw new Error("Error en la llamada");
-        }
-        return response.json();
-      })
-      .then(function (respuesta) {
-
-        if (Object.keys(respuesta).length === 0) {
-          msj_toastr("Error", "No se encontro el activo.", 'e');
-        }
-        $("#txt_codigoPlaca_mEA").val(respuesta['id_activo']);
-        $("#txt_Placa_mEA").val(respuesta["placa_activo"]);
-        $("#txt_Propietario_mEA").val(respuesta['nombre_funcionario']);
-        $('#txt_categoria_mEA').val(respuesta["detalle_categoria"]);
-        $('#txt_Marca_mEA').val(respuesta["detalle_marca"]);
-        
-        $('#txt_detalle_mEA').val(respuesta["descripcion_activo"]);
-        $('#txt_subCategoria_mEA').val(respuesta['detalle_subcategoria']);
-        
-        $('#txt_placaBuscar_mEA').val("");
-
-      })
-      .catch(function (error) {
-        console.log("***Error***:", error);
-      });
-
-  });*/
+     $('#txt_placaBuscarMCA').val("");
+ 
+ 
+ 
+     // Configurar la solicitud Fetch
+     fetch("ajax/activos.ajax.php", {
+       method: "POST",
+       body: datos,
+       cache: "no-cache",
+       headers: {
+         // Puedes ajustar los encabezados según tus necesidades
+         // En este caso, estamos enviando datos en formato FormData
+       },
+     })
+       .then(function (response) {
+         if (!response.ok) {
+           throw new Error("Error en la llamada");
+         }
+         return response.json();
+       })
+       .then(function (respuesta) {
+ 
+         if (Object.keys(respuesta).length === 0) {
+           msj_toastr("Error", "No se encontro el activo.", 'e');
+         }
+         $("#txt_codigoPlaca_mEA").val(respuesta['id_activo']);
+         $("#txt_Placa_mEA").val(respuesta["placa_activo"]);
+         $("#txt_Propietario_mEA").val(respuesta['nombre_funcionario']);
+         $('#txt_categoria_mEA').val(respuesta["detalle_categoria"]);
+         $('#txt_Marca_mEA').val(respuesta["detalle_marca"]);
+         
+         $('#txt_detalle_mEA').val(respuesta["descripcion_activo"]);
+         $('#txt_subCategoria_mEA').val(respuesta['detalle_subcategoria']);
+         
+         $('#txt_placaBuscar_mEA').val("");
+ 
+       })
+       .catch(function (error) {
+         console.log("***Error***:", error);
+       });
+ 
+   });*/
 
 
 
 
   // ====================================================== //
-  // =================== EDITAR USUARIO =================== //
+  // =================== BUSCAR ACTIVO PARA PRESTAMO =================== //
   // ====================================================== //
   $(document).on("click", "#btnBuscarPlaca", function () {
+    
+
+    if (spinnerContainer) {
+      spinnerContainer.style.display = 'flex';
+    }
+
+
     let placaBuscar = document.getElementById('txt_placaBuscar');
     let strPlacaBuscar = placaBuscar.value;
 
     if (strPlacaBuscar.length === 0) {
       msj_toastr("Error", "Debe ingresar un número de placa de activo.", 'e');
+
+      if (spinnerContainer) {
+        spinnerContainer.style.display = 'none';
+        spinnerContainer = null;
+      }
       return;
     }
 
@@ -316,10 +337,21 @@ $(document).ready(function () {
           if (respuesta != false) {
             if (usuario !== respuesta["id_funcionario"]) {
               msj_toastr("Error", "La placa ingresada no corresponde a ninguno de sus activos.", 'w');
+              
+              if (spinnerContainer) {
+                spinnerContainer.style.display = 'none';
+                spinnerContainer = null;
+              }
+
               return;
             }
           } else {
             msj_toastr("Upps!", "Algo salió mal, no encontramos el activo, puedes intentar ingresar la placa del activo nuevamente.", 'w');
+            
+            if (spinnerContainer) {
+              spinnerContainer.style.display = 'none';
+              spinnerContainer = null;
+            }
           }
 
           // Llamar a la función y asignar el resultado a una variable
@@ -329,10 +361,21 @@ $(document).ready(function () {
 
             if (activoPrestado === true) {
               msj_toastr('Activo en prestamo', 'El activo ya se encuentra en prestamo', 'w');
+              
+              if (spinnerContainer) {
+                spinnerContainer.style.display = 'none';
+                spinnerContainer = null;
+              }
               return;
             }
           } else {
             msj_toastr("Error", "Parece que tuvimos un problema.", 'e');
+            
+            if (spinnerContainer) {
+              spinnerContainer.style.display = 'none';
+              spinnerContainer = null;
+            }
+
             return;
           }
 
@@ -351,14 +394,31 @@ $(document).ready(function () {
 
         } catch (error) {
           msj_toastr("***Error en la llamada Fetch ***:" + error, "", "e");
+          
+          if (spinnerContainer) {
+            spinnerContainer.style.display = 'none';
+            spinnerContainer = null;
+          }
         }
 
       } else {
         console.log("No hay usuario en la sesión");
         msj_toastr("No hay usuario en la sesión", "", 'e');
+       
+        if (spinnerContainer) {
+          spinnerContainer.style.display = 'none';
+          spinnerContainer = null;
+        }
       }
     }).catch(error => {
       console.log("Error:", error);
+    }).finally(function () {
+      
+      if (spinnerContainer) {
+        spinnerContainer.style.display = 'none';
+        spinnerContainer = null;
+      }
+
     });
   });
 
@@ -398,10 +458,10 @@ $(document).ready(function () {
       const respuesta = await response.json();
 
       if (respuesta[0].hasOwnProperty('id_activo')) {
-        
+
         if (respuesta[0]['respta_receptor_sa'] == '0') {
           return false;
-        }else{
+        } else {
           return respuesta[0]['devuelto_sa'] == '0';
         }
       } else {
@@ -566,9 +626,3 @@ $(document).ready(function () {
   };
 
 });
-
-
-
-
-
-

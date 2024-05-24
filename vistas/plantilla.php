@@ -89,6 +89,9 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
     // - <!-- Site wrapper -->  //
     echo  '<div class="wrapper">';
 
+    // ~~~~~~~~~~~~~~~ SPINER ~~~~~~~~~~~~~~ //
+include "modulos/spiner.php";
+
     // ~~~~~~~~~~~~~~~ CABEZOTE ~~~~~~~~~~~~~~ //
     include "modulos/cabezote.php";
 
@@ -144,6 +147,10 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
 
                 case 'activos':
                     //  echo '<script src="vistas/js/activos.js"></script>';
+                    break;
+
+                case 'misactivos':
+                     echo '<script src="vistas/js/misactivos.js"></script>';
                     break;
 
                 case 'solicitudesEnviadas':

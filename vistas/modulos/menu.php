@@ -117,7 +117,7 @@ include_once 'vistas/modulos/modal/modalLeerQR.php';
               echo '<li class="nav-item">';
               echo '<a href="incautarActivo" class="nav-link">';
               echo '<i class="far fa-circle nav-icon"></i>';
-              echo '<p>Incautar activo</p>';
+              echo '<p>Confiscar activo</p>';
               echo '</a>';
               echo '</li>';
               echo '</ul>';
@@ -134,7 +134,7 @@ include_once 'vistas/modulos/modal/modalLeerQR.php';
             <li class="nav-item">
               <a href="misActivosIncautados" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Mis activos incautados</p>
+                <p>Mis activos confiscados</p>
               </a>
             </li>
           </ul>
