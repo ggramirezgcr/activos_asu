@@ -78,9 +78,14 @@ class ModelomisActivosIncautados
 
 
             if ($stmt->execute()) {
-                return $stmt->rowCount();
+                if ($stmt->rowCount() > 0)
+                {
+                    return 'ok';
+                }else {
+                    return 'error';
+                }
             } else {
-                return 0;
+                return 'error';
             }
         } catch (PDOException  $e) {
             return 0;

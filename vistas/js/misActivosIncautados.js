@@ -73,7 +73,7 @@ $(document).ready(function () {
     // ============== BTN ACEPTAR INCAUTAMIENTO ============= //
     // ====================================================== //
     $(document).on('click', "#btn_aceptarIncautamiento", async function () {
-
+debugger;
         if (spinnerContainer) {
             spinnerContainer.style.display = 'flex';
         }
@@ -111,7 +111,7 @@ $(document).ready(function () {
             const datos_devueltos = await respuesta.json();
 
             //Controla que se haya afectado filas en la bd
-            if (datos_devueltos == '1') {
+            if (datos_devueltos == 'ok') {
                 window.location = "misActivosIncautados";
             }
 
@@ -140,6 +140,7 @@ $(document).ready(function () {
     // ============= BTN RECHAZAR INCAUTAMIENTO ============= //
     // ====================================================== //
     $(document).on('click', "#btn_rechazarIncautamiento", async function () {
+        debugger;
 
         if (spinnerContainer) {
             spinnerContainer.style.display = 'flex';
@@ -177,7 +178,7 @@ $(document).ready(function () {
             const datos_devueltos = await respuesta.json();
     
             //Controla que se haya afectado filas en la bd
-            if (datos_devueltos == '1') {
+            if (datos_devueltos == 'ok') {
                 window.location = "misActivosIncautados";
             }
 
@@ -186,7 +187,7 @@ $(document).ready(function () {
         } catch (error) {
 
             alert(error);
-            
+
             //Ocultamos spiner
             if (spinnerContainer) {
                 spinnerContainer.style.display = 'none';

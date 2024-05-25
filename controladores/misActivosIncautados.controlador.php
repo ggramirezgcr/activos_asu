@@ -29,7 +29,7 @@ class ControladormisActivosIncautados
         $respuesta = ModelomisActivosIncautados::mdlRespuestaIncautamiento($tabla, $datos);
 
         //enviar email
-        if ($respuesta == '1') {
+        if ($respuesta == 'ok') {
             if ($datos['respuesta'] == '1') {
                 ControladorHelpers::ctrProceso_envioCorreo($datosEmail, 'ACEPTO EL ACTIVO INCAUTADO', 'Han aceptado la devolución  del activo incautado.', '', 'a');
             }else {
