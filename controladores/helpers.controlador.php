@@ -49,7 +49,6 @@ class ControladorHelpers
             }
 
             ControladorEmail::ctrEnviarEmail($asunto, $para, $html, $datos['idfun']);
-            
         } catch (\Throwable $th) {
         }
     }
@@ -99,61 +98,128 @@ class ControladorHelpers
 
             $html = '
             <html>
-            <head>
-                <style>
-                    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
-            
-                    * {
-                        margin: 0;
-                        padding: 0;
-                        box-sizing: border-box;
-                    }
-            
-                    body {
-                        font-family: "Montserrat", sans-serif;
-                        background-repeat: no-repeat;
-                        height: 100%; /* Cambiado a altura automática */
-                        min-height: 100vh; /* Para garantizar que ocupe al menos el 100% del alto de la ventana del navegador */
-                    }
-                </style>
-            </head>
-            
-            <body>
-                <div class="prueba_cls" style="padding-bottom:80px;margin:0; background-color:#f7fafc">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="center">
-                            <section class="contenedor" style="overflow: hidden; border-radius: 10px; padding:30px">
-                                <div class="card" style="width: 400px; height:auto; border-radius: 10px; box-shadow: 10px 20px 10px rgba(0, 0, 0, 0.442); background-color: #231e39; color: #b3b8cd;">
-                                    <div class="card__sup" style="display: flex; flex-direction: column; align-items: center; height: 400px; width: 100%; margin: 30px 0px 20px;">
-                                        <h1 class="Position" style="display: block; position: relative; font-size: 1rem; background-color: #87f33f; padding: 10px; border-radius: 9px 0; color: #231e39; top: -20px; left: 0px; margin: 10px 0px 10px">' . $titulo . '</h1>
-                                        <div class="card__img" style="height: 120px; width: 120px; overflow: hidden; border-radius: 50%; padding: 5px; border: 2px solid #c101d4; margin-top: 30px;">
-                                            <img src="' . $imagen . '" alt="" class="img__card" style="max-width: 100%; height: auto; border-radius: 50%; object-fit: cover;">
+                <head>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif; /* Usar una fuente más común */
+                            background-color: #f7fafc;
+                            margin: 0;
+                            padding: 0;
+                        }
+
+                        .contenedor {
+                            width: 100%;
+                            padding: 30px;
+                            background-color: #f7fafc;
+                        }
+
+                        .card {
+                            width: 400px;
+                            background-color: #231e39;
+                            color: #b3b8cd;
+                            margin: 0 auto;
+                            text-align: center; /* Centrar el contenido de la tarjeta */
+                        }
+
+                        .Position {
+                            font-size: 1rem;
+                            background-color: #87f33f;
+                            padding: 10px;
+                            color: #231e39;
+                            margin-bottom: 10px;
+                            display: inline-block; /* Para asegurar que el margen funcione */
+                        }
+
+                        .card__img {
+                            height: 120px;
+                            width: 120px;
+                            border-radius: 50%;
+                            border: 2px solid #c101d4;
+                            margin-top: 30px;
+                        }
+
+                        .img__card {
+                            max-width: 100%;
+                            height: auto;
+                            border-radius: 50%;
+                            display: block;
+                            margin: 0 auto; /* Centrando la imagen */
+                        }
+
+                        .btn__msj {
+                            border: 2px solid #c400d7;
+                            text-decoration: none;
+                            color: #f2f2f2;
+                            padding: 10px 20px;
+                            font-size: 0.9rem;
+                            background-color: #c400d7;
+                            display: inline-block;
+                            margin-top: 25px;
+                        }
+
+                        .card__out {
+                            width: 100%;
+                            background-color: #1f1a36;
+                            padding: 20px 0px;
+                            margin-top: 20px;
+                        }
+
+                        .text__skill__card {
+                            font-size: 0.9rem;
+                        }
+
+                        .skills__card {
+                            padding: 10px 15px;
+                        }
+
+                        h3 {
+                            font-weight: 300;
+                            font-size: .7rem;
+                            padding: 3px;
+                            border: 1px solid #403a5a;
+                        }
+                    </style>
+                </head>
+                    <body>
+                        <div class="contenedor">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center">
+                                        <div class="card">
+                                            <div class="card__sup">
+                                                <h1 class="Position">' . $titulo . '</h1>
+                                                <table align="center" border="0" cellspacing="0" cellpadding="0" style="margin: 0 auto; padding: 0;">
+                                                    <tr>
+                                                        <td align="center" style="padding: 0;">
+                                                            <div class="card__img">
+                                                                <img src="' . $imagen . '" alt="" class="img__card">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <div style="font-size: 1.1rem; font-weight: 550; padding-top: 14px;">' . $nombre . '</div>
+                                                <div style="font-size: 0.9rem; padding-top: 4px;">Área de Salud Upala</div>
+                                                <div style="font-size: 1rem; text-align: center; padding: 15px 5px 0px; margin: 5px; font-weight: bold;">NÚMERO DE ACTIVO</div>
+                                                <div style="font-size: 1.5rem; text-align: center; padding: 0px 50px; color: #febb0b; font-weight: bold;">' . $activo . '</div>
+                                                <a href="https://www.stecmacr.com/asupala" class="btn__msj"><span>Revisar</span></a>
+                                            </div>
+                                            <div class="card__out">
+                                                <div class="text__skill__card">Información</div>
+                                                <div class="skills__card">
+                                                    <h3>El contenido de este email es para uso exclusivo de los funcionarios del área de salud de Upala.</h3>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div style="font-size: 1.1rem; line-height: normal; font-weight: 550; padding-top: 14px;"   >' . $nombre . '</div>
-                                        <div style="font-size: 0.9rem; padding-top: 4px;">Are de Salud Upala</div>
-                                        <div style="font-size: 1rem; text-align: center; padding: 15px 5px 0px; margin: 5px; font-weight: bold;">NUMERO DE ACTIVO </div>
-                                        <div style="font-size: 1rem; text-align: center; padding: 0px 50px; letter-spacing: 0.8pt; color: #febb0b; font-weight: bold; font-size: 1.5rem; ">' . $activo . '</div>
-                                        <div class="btns__card" style="height: 40px; margin-top: 25px;">
-                                            <a href="https://www.stecmacr.com/asupala" class="btn__msj" style="border: 2px solid #c400d7; text-decoration: none; color: #f2f2f2; padding: 10px 20px; font-size: 0.9rem; text-align: center; font-weight: 400; border-radius: 5px; background: #c400d7 !important; ;"><span>Revisar</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="card__out" style="width: 100%; background-color: #1f1a36; padding: 20px 10px; overflow: hidden; border-radius: 0px 0px 10px 10px">
-                                        <div class="text__skill__card" style="font-size: 0.9rem; letter-spacing: -0.5pt;">Informaci&oacuten</div>
-                                        <div class="skills__card" style="padding: 10px 15px; height: 100px; width: 100%;">
-                                            <h3 style="display: inline-block; font-weight: 300; font-size: .7rem; padding: 3px; margin-top: 5px; margin-right: 3px; border: 1px solid #403a5a;">El contenido de este email es para uso esclusivo de los funcionarios del area de salud de Upala.</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </td>
-                    </tr>
-                </table>
-                </div>
-            </body>
-            
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </body>
             </html>
             ';
+
+
+
 
             return $html;
         } catch (\Throwable $th) {
@@ -180,58 +246,123 @@ class ControladorHelpers
             <html>
             <head>
                 <style>
-                    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
-            
-                    * {
+                    body {
+                        font-family: Arial, sans-serif; /* Usar una fuente más común */
+                        background-color: #f7fafc;
                         margin: 0;
                         padding: 0;
-                        box-sizing: border-box;
                     }
-            
-                    body {
-                        font-family: "Montserrat", sans-serif;
-                        background-repeat: no-repeat;
-                        height: 100%; /* Cambiado a altura automática */
-                        min-height: 100vh; /* Para garantizar que ocupe al menos el 100% del alto de la ventana del navegador */
+
+                    .contenedor {
+                        width: 100%;
+                        padding: 30px;
+                        background-color: #f7fafc;
+                    }
+
+                    .card {
+                        width: 400px;
+                        background-color: #231e39;
+                        color: #b3b8cd;
+                        margin: 0 auto;
+                        text-align: center; /* Centrar el contenido de la tarjeta */
+                    }
+
+                    .Position {
+                        font-size: 1rem;
+                        background-color: #febb0b;
+                        padding: 10px;
+                        color: #231e39;
+                        margin-bottom: 10px;
+                        display: inline-block; /* Para asegurar que el margen funcione */
+                    }
+
+                    .card__img {
+                        height: 120px;
+                        width: 120px;
+                        border-radius: 50%;
+                        border: 2px solid #c101d4;
+                        margin-top: 30px;
+                    }
+
+                    .img__card {
+                        max-width: 100%;
+                        height: auto;
+                        border-radius: 50%;
+                        display: block;
+                        margin: 0 auto; /* Centrando la imagen */
+                    }
+
+                    .btn__msj {
+                        border: 2px solid #c400d7;
+                        text-decoration: none;
+                        color: #f2f2f2;
+                        padding: 10px 20px;
+                        font-size: 0.9rem;
+                        background-color: #c400d7;
+                        display: inline-block;
+                        margin-top: 25px;
+                    }
+
+                    .card__out {
+                        width: 100%;
+                        background-color: #1f1a36;
+                        padding: 20px 0px;
+                        margin-top: 20px;
+                    }
+
+                    .text__skill__card {
+                        font-size: 0.9rem;
+                    }
+
+                    .skills__card {
+                        padding: 10px 15px;
+                    }
+
+                    h3 {
+                        font-weight: 300;
+                        font-size: .7rem;
+                        padding: 3px;
+                        border: 1px solid #403a5a;
                     }
                 </style>
             </head>
-            
-            <body>
-                <div class="prueba_cls" style="padding-bottom:80px;margin:0; background-color:#f7fafc">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="center">
-                            <section class="contenedor" style="overflow: hidden; border-radius: 10px; padding:30px">
-                                <div class="card" style="width: 400px; height:auto; border-radius: 10px; box-shadow: 10px 20px 10px rgba(0, 0, 0, 0.442); background-color: #231e39; color: #b3b8cd;">
-                                    <div class="card__sup" style="display: flex; flex-direction: column; align-items: center; height: 400px; width: 100%; margin: 30px 0px 20px;">
-                                        <h1 class="Position" style="display: block; position: relative; font-size: 1rem; background-color: #febb0b; padding: 10px; border-radius: 9px 0; color: #231e39; top: -20px; left: 0px; margin: 10px 0px 10px">' . $titulo . '</h1>
-                                        <div class="card__img" style="height: 120px; width: 120px; overflow: hidden; border-radius: 50%; padding: 5px; border: 2px solid #c101d4; margin-top: 30px;">
-                                            <img src="' . $imagen . '" alt="" class="img__card" style="max-width: 100%; height: auto; border-radius: 50%; object-fit: cover;">
+                <body>
+                    <div class="contenedor">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="center">
+                                    <div class="card">
+                                        <div class="card__sup">
+                                            <h1 class="Position">' . $titulo . '</h1>
+                                            <table align="center" border="0" cellspacing="0" cellpadding="0" style="margin: 0 auto; padding: 0;">
+                                                <tr>
+                                                    <td align="center" style="padding: 0;">
+                                                        <div class="card__img">
+                                                            <img src="' . $imagen . '" alt="" class="img__card">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div style="font-size: 1.1rem; font-weight: 550; padding-top: 14px;">' . $nombre . '</div>
+                                            <div style="font-size: 0.9rem; padding-top: 4px;">Área de Salud Upala</div>
+                                            <div style="font-size: 1rem; text-align: center; padding: 15px 5px 0px; margin: 5px; font-weight: bold;">NÚMERO DE ACTIVO</div>
+                                            <div style="font-size: 1.5rem; text-align: center; padding: 0px 50px; color: #febb0b; font-weight: bold;">' . $activo . '</div>
+                                            <a href="https://www.stecmacr.com/asupala" class="btn__msj"><span>Revisar</span></a>
                                         </div>
-                                        <div style="font-size: 1.1rem; line-height: normal; font-weight: 550; padding-top: 14px;"   >' . $nombre . '</div>
-                                        <div style="font-size: 0.9rem; padding-top: 4px;">Are de Salud Upala</div>
-                                        <div style="font-size: 1rem; text-align: center; padding: 15px 5px 0px; margin: 5px; font-weight: bold;">NUMERO DE ACTIVO </div>
-                                        <div style="font-size: 1rem; text-align: center; padding: 0px 50px; letter-spacing: 0.8pt; color: #febb0b; font-weight: bold; font-size: 1.5rem; ">' . $activo . '</div>
-                                        <div class="btns__card" style="height: 40px; margin-top: 25px;">
-                                            <a href="https://www.stecmacr.com/asupala" class="btn__msj" style="border: 2px solid #c400d7; text-decoration: none; color: #f2f2f2; padding: 10px 20px; font-size: 0.9rem; text-align: center; font-weight: 400; border-radius: 5px; background: #c400d7 !important; ;"><span>Revisar</span></a>
+                                        <div class="card__out">
+                                            <div class="text__skill__card">Información</div>
+                                            <div class="skills__card">
+                                                <h3>El contenido de este email es para uso exclusivo de los funcionarios del área de salud de Upala.</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card__out" style="width: 100%; background-color: #1f1a36; padding: 20px 10px; overflow: hidden; border-radius: 0px 0px 10px 10px">
-                                        <div class="text__skill__card" style="font-size: 0.9rem; letter-spacing: -0.5pt;">Informaci&oacuten</div>
-                                        <div class="skills__card" style="padding: 10px 15px; height: 100px; width: 100%;">
-                                            <h3 style="display: inline-block; font-weight: 300; font-size: .7rem; padding: 3px; margin-top: 5px; margin-right: 3px; border: 1px solid #403a5a;">El contenido de este email es para uso esclusivo de los funcionarios del area de salud de Upala.</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </td>
-                    </tr>
-                </table>
-                </div>
-            </body>
-            
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </body>
             </html>
+
             ';
 
             return $html;
@@ -259,58 +390,123 @@ class ControladorHelpers
             <html>
             <head>
                 <style>
-                    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
-            
-                    * {
+                    body {
+                        font-family: Arial, sans-serif; /* Usar una fuente más común */
+                        background-color: #f7fafc;
                         margin: 0;
                         padding: 0;
-                        box-sizing: border-box;
                     }
             
-                    body {
-                        font-family: "Montserrat", sans-serif;
-                        background-repeat: no-repeat;
-                        height: 100%; /* Cambiado a altura automática */
-                        min-height: 100vh; /* Para garantizar que ocupe al menos el 100% del alto de la ventana del navegador */
+                    .contenedor {
+                        width: 100%;
+                        padding: 30px;
+                        background-color: #f7fafc;
+                    }
+            
+                    .card {
+                        width: 400px;
+                        background-color: #231e39;
+                        color: #b3b8cd;
+                        margin: 0 auto;
+                        text-align: center; /* Centrar el contenido de la tarjeta */
+                    }
+            
+                    .Position {
+                        font-size: 1rem;
+                        background-color: #f33f57;
+                        padding: 10px;
+                        color: #ffffff;
+                        margin-bottom: 10px;
+                        display: inline-block; /* Para asegurar que el margen funcione */
+                    }
+            
+                    .card__img {
+                        height: 120px;
+                        width: 120px;
+                        border-radius: 50%;
+                        border: 2px solid #c101d4;
+                        margin-top: 30px;
+                    }
+            
+                    .img__card {
+                        max-width: 100%;
+                        height: auto;
+                        border-radius: 50%;
+                        display: block;
+                        margin: 0 auto; /* Centrando la imagen */
+                    }
+            
+                    .btn__msj {
+                        border: 2px solid #c400d7;
+                        text-decoration: none;
+                        color: #f2f2f2;
+                        padding: 10px 20px;
+                        font-size: 0.9rem;
+                        background-color: #c400d7;
+                        display: inline-block;
+                        margin-top: 25px;
+                    }
+            
+                    .card__out {
+                        width: 100%;
+                        background-color: #1f1a36;
+                        padding: 20px 0px;
+                        margin-top: 20px;
+                    }
+            
+                    .text__skill__card {
+                        font-size: 0.9rem;
+                    }
+            
+                    .skills__card {
+                        padding: 10px 15px;
+                    }
+            
+                    h3 {
+                        font-weight: 300;
+                        font-size: .7rem;
+                        padding: 3px;
+                        border: 1px solid #403a5a;
                     }
                 </style>
             </head>
-            
             <body>
-                <div class="prueba_cls" style="padding-bottom:80px;margin:0; background-color:#f7fafc">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="center">
-                            <section class="contenedor" style="overflow: hidden; border-radius: 10px; padding:30px">
-                                <div class="card" style="width: 400px; height:auto; border-radius: 10px; box-shadow: 10px 20px 10px rgba(0, 0, 0, 0.442); background-color: #231e39; color: #b3b8cd;">
-                                    <div class="card__sup" style="display: flex; flex-direction: column; align-items: center; height: 400px; width: 100%; margin: 30px 0px 20px;">
-                                        <h1 class="Position" style="display: block; position: relative; font-size: 1rem; background-color: #f33f57; padding: 10px; border-radius: 9px 0; color: #ffffff; top: -20px; left: 0px; margin: 10px 0px 10px">' . $titulo . '</h1>
-                                        <div class="card__img" style="height: 120px; width: 120px; overflow: hidden; border-radius: 50%; padding: 5px; border: 2px solid #c101d4; margin-top: 30px;">
-                                            <img src="' . $imagen . '" alt="" class="img__card" style="max-width: 100%; height: auto; border-radius: 50%; object-fit: cover;">
-                                        </div>
-                                        <div style="font-size: 1.1rem; line-height: normal; font-weight: 550; padding-top: 14px;"   >' . $nombre . '</div>
-                                        <div style="font-size: 0.9rem; padding-top: 4px;">Are de Salud Upala</div>
-                                        <div style="font-size: 1rem; text-align: center; padding: 15px 5px 0px; margin: 5px; font-weight: bold;">NUMERO DE ACTIVO </div>
-                                        <div style="font-size: 1rem; text-align: center; padding: 0px 50px; letter-spacing: 0.8pt; color: #febb0b; font-weight: bold; font-size: 1.5rem; ">' . $activo . '</div>
-                                        <div class="btns__card" style="height: 40px; margin-top: 25px;">
-                                            <a href="https://www.stecmacr.com/asupala" class="btn__msj" style="border: 2px solid #c400d7; text-decoration: none; color: #f2f2f2; padding: 10px 20px; font-size: 0.9rem; text-align: center; font-weight: 400; border-radius: 5px; background: #c400d7 !important; ;"><span>Revisar</span></a>
-                                        </div>
+                <div class="contenedor">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td align="center">
+                                <div class="card">
+                                    <div class="card__sup">
+                                        <h1 class="Position">' . $titulo . '</h1>
+                                        <table align="center" border="0" cellspacing="0" cellpadding="0" style="margin: 0 auto; padding: 0;">
+                                            <tr>
+                                                <td align="center" style="padding: 0;">
+                                                    <div class="card__img">
+                                                        <img src="' . $imagen . '" alt="" class="img__card">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div style="font-size: 1.1rem; font-weight: 550; padding-top: 14px;">' . $nombre . '</div>
+                                        <div style="font-size: 0.9rem; padding-top: 4px;">Área de Salud Upala</div>
+                                        <div style="font-size: 1rem; text-align: center; padding: 15px 5px 0px; margin: 5px; font-weight: bold;">NÚMERO DE ACTIVO</div>
+                                        <div style="font-size: 1.5rem; text-align: center; padding: 0px 50px; color: #febb0b; font-weight: bold;">' . $activo . '</div>
+                                        <a href="https://www.stecmacr.com/asupala" class="btn__msj"><span>Revisar</span></a>
                                     </div>
-                                    <div class="card__out" style="width: 100%; background-color: #1f1a36; padding: 20px 10px; overflow: hidden; border-radius: 0px 0px 10px 10px">
-                                        <div class="text__skill__card" style="font-size: 0.9rem; letter-spacing: -0.5pt;">Informaci&oacuten</div>
-                                        <div class="skills__card" style="padding: 10px 15px; height: 100px; width: 100%;">
-                                            <h3 style="display: inline-block; font-weight: 300; font-size: .7rem; padding: 3px; margin-top: 5px; margin-right: 3px; border: 1px solid #403a5a;">El contenido de este email es para uso esclusivo de los funcionarios del area de salud de Upala.</h3>
+                                    <div class="card__out">
+                                        <div class="text__skill__card">Información</div>
+                                        <div class="skills__card">
+                                            <h3>El contenido de este email es para uso exclusivo de los funcionarios del área de salud de Upala.</h3>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </body>
-            
             </html>
+            
             ';
 
             return $html;

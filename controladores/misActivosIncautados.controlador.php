@@ -31,9 +31,9 @@ class ControladormisActivosIncautados
         //enviar email
         if ($respuesta == 'ok') {
             if ($datos['respuesta'] == '1') {
-                ControladorHelpers::ctrProceso_envioCorreo($datosEmail, 'ACEPTO EL ACTIVO INCAUTADO', 'Han aceptado la devolución  del activo incautado.', '', 'a');
+                ControladorHelpers::ctrProceso_envioCorreo($datosEmail, 'ACEPTO LA DEVOLUCION DEL ACTIVO CONFISCADO', 'Han aceptado la devolución del activo confiscado.', '', 'a');
             }else {
-                ControladorHelpers::ctrProceso_envioCorreo($datosEmail, 'RECHAZO DE DEVOLUCION ACTIVO INCAUTADO', 'Han rechazado el activo incautado que fue devuelto .', '', 'e');
+                ControladorHelpers::ctrProceso_envioCorreo($datosEmail, 'RECHAZO LA DEVOLUCION DEL ACTIVO CONFISCADO', 'Han rechazado el activo confiscado que fue devuelto.', '', 'e');
             }
         }
 

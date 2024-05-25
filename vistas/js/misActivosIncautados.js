@@ -72,14 +72,13 @@ $(document).ready(function () {
     // ====================================================== //
     // ============== BTN ACEPTAR INCAUTAMIENTO ============= //
     // ====================================================== //
-    $(document).on('click', "#btn_aceptarIncautamiento", async function () {
-debugger;
-        if (spinnerContainer) {
+    $(document).on('click', "#btn_aceptarIncautamiento", function () {
+       debugger;
+        
+       if (spinnerContainer) {
             spinnerContainer.style.display = 'flex';
         }
 
-
-        try {
 
             var idIncautamiento = $(this).attr('idIncautamiento');
             var idIncaut = $(this).attr('idIncaut');
@@ -97,42 +96,37 @@ debugger;
             formData.append('foto', foto);
 
 
-            const respuesta = await
-                fetch("ajax/misActivosIncautados.ajax.php", {
-                    method: "POST",
-                    body: formData,
-                    cache: "no-cache"
-                });
-
-            if (!respuesta.ok) {
-                throw { ok: false, msj: "error 404" };
-            }
-
-            const datos_devueltos = await respuesta.json();
-
-            //Controla que se haya afectado filas en la bd
-            if (datos_devueltos == 'ok') {
-                window.location = "misActivosIncautados";
-            }
-
-        } catch (error) {
-
-            alert(error);
-
-            //Ocultamos spiner
-            if (spinnerContainer) {
-                spinnerContainer.style.display = 'none';
-            }
-
-
-        } finally {
-            //Ocultamos spiner
-            if (spinnerContainer) {
-                spinnerContainer.style.display = 'none';
-            }
-        }
-
-    })
+            fetch("ajax/misActivosIncautados.ajax.php", {
+                method: "POST",
+                body: formData,
+                cache: "no-cache"
+            }).then((respuesta) => {
+                if (!respuesta.ok) {
+                    throw { ok: false, msj: "error 404" };
+                }
+                return respuesta.json();
+            }).then((datos) => {
+                if (datos && Object.keys(datos).length > 0) {
+                    if (datos === 'ok') {
+                        window.location = "misActivosIncautados";
+                    }
+                } else {
+                    throw { ok: false, msj: "Datos vacíos o no es JSON" };
+                }
+            }).catch((error) => {
+                // Ocultamos el spinner
+                if (spinnerContainer) {
+                    spinnerContainer.style.display = 'none';
+                }
+                console.log(error);
+            }).finally(() => {
+                // Ocultamos el spinner
+                if (spinnerContainer) {
+                    spinnerContainer.style.display = 'none';
+                }
+            });
+            
+    });// /. ACEPTAR INCAUTAMIENTO
 
 
 
@@ -146,63 +140,55 @@ debugger;
             spinnerContainer.style.display = 'flex';
         }
 
+
        
-        try {
 
             var idIncautamiento = $(this).attr('idIncautamiento');
             var idIncaut = $(this).attr('idIncaut');
             var placa = $(this).attr('placa_incaut');
             var nombre = document.getElementById('nombre_mAI').value;
             var foto = document.getElementById('foto_mAI').value;
-    
+
             var formData = new FormData();
-    
+
             formData.append('idIncautamiento', idIncautamiento);
             formData.append('rechazarIncaut', true);
             formData.append('incautador', idIncaut);
             formData.append('placa', placa);
             formData.append('nombre', nombre);
             formData.append('foto', foto);
-    
-            const respuesta = await
-                fetch("ajax/misActivosIncautados.ajax.php", {
-                    method: "POST",
-                    body: formData,
-                    cache: "no-cache"
-                });
-    
-            if (!respuesta.ok) {
-                throw { ok: false, msj: "error 404" };
-            }
-    
-            const datos_devueltos = await respuesta.json();
-    
-            //Controla que se haya afectado filas en la bd
-            if (datos_devueltos == 'ok') {
-                window.location = "misActivosIncautados";
-            }
 
-
-
-        } catch (error) {
-
-            alert(error);
-
-            //Ocultamos spiner
-            if (spinnerContainer) {
-                spinnerContainer.style.display = 'none';
-            }
-
-        } finally {
-
-            //Ocultamos spiner
-            if (spinnerContainer) {
-                spinnerContainer.style.display = 'none';
-            }
-        }
-
-
-    })
+            fetch("ajax/misActivosIncautados.ajax.php", {
+                method: "POST",
+                body: formData,
+                cache: "no-cache"
+            }).then((respuesta) => {
+                if (!respuesta.ok) {
+                    throw { ok: false, msj: "error 404" };
+                }
+                return respuesta.json();
+            }).then((datos) => {
+                if (datos && Object.keys(datos).length > 0) {
+                    if (datos === 'ok') {
+                        window.location = "misActivosIncautados";
+                    }
+                } else {
+                    throw { ok: false, msj: "Datos vacíos o no es JSON" };
+                }
+            }).catch((error) => {
+                // Ocultamos el spinner
+                if (spinnerContainer) {
+                    spinnerContainer.style.display = 'none';
+                }
+                console.log(error);
+            }).finally(() => {
+                // Ocultamos el spinner
+                if (spinnerContainer) {
+                    spinnerContainer.style.display = 'none';
+                }
+            });
+      
+    }); // /.RECHAZAR INCAUTAMIENTO
 
 
 
