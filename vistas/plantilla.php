@@ -27,50 +27,15 @@ $_SESSION["timeout"] = time();
 
     <link rel="shortcut icon" href="../vistas/img/ico/box.ico" type="image/x-icon">
 
-    <!--// ====================================================== //
-    // ==================== PLUGINS STYLE =================== //
-    // ====================================================== //-->
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="vistas/plugins/fontawesome-free/css/all.min.css">
-
-    <!-- Theme style -->
-    <link rel="stylesheet" href="vistas/dist/css/adminlte.css">
-
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="vistas/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-
-    <!-- Toastr -->
-    <link rel="stylesheet" href="vistas/plugins/toastr/toastr.min.css">
-
-    <!-- main -->
-    <link rel="stylesheet" href="vistas/dist/css/main.css">
-
-    <!-- DataTables -->
-
-    <link rel="stylesheet" href="vistas/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="vistas/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="vistas/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-    <!--Select2-->
-    <link rel="stylesheet" href="vistas/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="vistas/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-
-    <link rel="stylesheet" href="vistas/dist/css/adminlte.min.css">
-
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="vistas/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-
-    <!--flatpickr Fechas-->
-    <link rel="stylesheet" href="vistas/plugins/flatpickr_/css/flatpickr.min.css">
-    <link rel="stylesheet" href="vistas/plugins/flatpickr_/css/material_red.css">
-
-    
+    <!--// ~~~~~~~~~~~~~~~ ESTILOS ~~~~~~~~~~~~~~~ //-->
     <?php
-    include_once "modulos/script_plugins.php";
+    include_once "modulos/includes/estilosInclude.php";
+    ?>
+
+    <!--// ~~~~~~~~~~~~~~~~~~ JS ~~~~~~~~~~~~~~~~~ //-->
+    <?php
+
     ?>
 
 </head>
@@ -90,7 +55,7 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
     echo  '<div class="wrapper">';
 
     // ~~~~~~~~~~~~~~~ SPINER ~~~~~~~~~~~~~~ //
-include "modulos/spiner.php";
+    include "modulos/spiner.php";
 
     // ~~~~~~~~~~~~~~~ CABEZOTE ~~~~~~~~~~~~~~ //
     include "modulos/cabezote.php";
@@ -116,19 +81,23 @@ include "modulos/spiner.php";
             $_GET["ruta"] == "incautarActivo" ||
             $_GET["ruta"] == "misActivosIncautados" ||
             $_GET["ruta"] == "acti" ||
+            $_GET["ruta"] == "funcionarios" ||
+            $_GET["ruta"] == "marcasActivos" ||
             $_GET["ruta"] == "salir"
         ) {
 
             include "modulos/" . $_GET["ruta"] . ".php";
             require_once "vistas/modulos/modal/modalLoading.php";
+            require_once "vistas/modulos/modal/modal.php";
+           
 
             // ##################################################################### //
             // ################### // - <!--Incluir los js-->  // ################## //
             // ##################################################################### //
 
-
             // ~ Estos scrip siempre se van a ocupar ~ //
-          //  echo '<script src="vistas/js/plantilla.js"></script>';
+            include_once "modulos/includes/script_plugins.php";
+
             echo '<script src="vistas/js/mensaje.js"></script>';
             echo '<script src="vistas/js/modalConfiguraciones.js"></script>';
             echo '<script src="vistas/js/activos.js"></script>';
@@ -150,7 +119,7 @@ include "modulos/spiner.php";
                     break;
 
                 case 'misactivos':
-                     echo '<script src="vistas/js/misactivos.js"></script>';
+                    echo '<script src="vistas/js/misactivos.js"></script>';
                     break;
 
                 case 'solicitudesEnviadas':
@@ -176,10 +145,24 @@ include "modulos/spiner.php";
 
                     break;
 
-                    case 'misActivosIncautados':
-                        echo '<script src="vistas/js/misActivosIncautados.js"></script>';
-                        
-                        break;
+                case 'misActivosIncautados':
+                    echo '<script src="vistas/js/misActivosIncautados.js"></script>';
+
+                    break;
+
+                case 'funcionarios':
+                    require_once "vistas/modulos/modal/modalNuevoFuncionario.php";
+                    echo '<script src="vistas/js/funcionarios.js"></script>';
+                    echo '<script src="vistas/js/funcionariosModulo.js"></script>';
+                    echo '<script src="vistas/js/modalNuevoFuncionario.js"></script>';
+
+                    break;
+
+                case 'marcasActivos':
+                    echo '<script src="vistas/js/marcasModulo.js"></script>';
+                    
+
+                    break;
 
                 default:
                     break;
@@ -193,17 +176,17 @@ include "modulos/spiner.php";
             echo '<script src="vistas/js/scanQR.js"></script>';
         } else {
             include "modulos/404.php";
-           // include_once "modulos/script_plugins.php";
+            include_once "modulos/includes/script_plugins.php";
         }
     } else {
         include "modulos/inicio.php";
-       // include_once "modulos/script_plugins.php";
-
+        
+        include_once "modulos/includes/script_plugins.php";
+        
         echo '<script src="vistas/js/inicio.js"></script>';
 
         // ~ Estos scrip siempre se van a ocupar ~ //
         echo '<script src="vistas/js/activos.js"></script>';
-      //  echo '<script src="vistas/js/plantilla.js"></script>';
         echo '<script src="vistas/js/mensaje.js"></script>';
         echo '<script src="vistas/js/modalConfiguraciones.js"></script>';
         echo '<script src="vistas/js/modalConsultarActivo.js"></script>';
@@ -219,17 +202,12 @@ include "modulos/spiner.php";
 } else {
     echo '<body class="hold-transition sidebar-mini sidebar-collapse login-page">';
     include "modulos/login.php";
-   // include_once "modulos/script_plugins.php";
+    // include_once "modulos/includes/script_plugins.php";
 }
 
-
-
-echo '</body>';
 ?> <!--/. -->
 
 
-
-<!--</body>-->
-
+</body>
 
 </html>

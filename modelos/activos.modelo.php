@@ -67,9 +67,15 @@ class ModeloActivos
 
                 $stmt->bindParam(":" . $item, $valor, PDO::PARAM_INT);
 
-                $stmt->execute();
+             if  ( $stmt->execute()){
+                 return $stmt->fetch(PDO::FETCH_ASSOC);
 
-                return $stmt->fetch(PDO::FETCH_ASSOC);
+             }else {
+                return 'error';
+             }
+
+
+
             } else {
                 $stmt = Conexion::conectar()->prepare(
                     "
@@ -187,9 +193,12 @@ class ModeloActivos
 
             $stmt = Conexion::conectar()->prepare($sql);
 
-            $stmt->execute();
+          if  ($stmt->execute()){
+              return $stmt->fetchAll(PDO::FETCH_ASSOC);
+          }else{
+            return 'error';
+          }
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } #////////////////////////////////////////////////////////////Fin If
     }
 

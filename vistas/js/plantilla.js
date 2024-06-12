@@ -13,7 +13,7 @@ $(document).ready(function ($) {
 
     try {
 
-       
+
 
         // ====================================================== //
         // ================== flatpickr Fechas ================== //
@@ -36,6 +36,7 @@ $(document).ready(function ($) {
         // ====================================================== //
         $.extend(true, $.fn.DataTable.defaults,
             {
+                "stateSave":true,
                 "responsive": true,
                 "autoWidth": false,
                 "dom": "frtip", // Agrega esta línea
@@ -67,6 +68,9 @@ $(document).ready(function ($) {
 
             })
 
+
+
+       
 
 
         // ====================================================== //
@@ -166,7 +170,7 @@ $(document).ready(function ($) {
             );
         }
 
-       
+
         // ====================================================== //
         // ============= Tabla solicitudes devueltas ============ //
         // ====================================================== //
@@ -234,7 +238,7 @@ $(document).ready(function ($) {
         alert("Error en el código JavaScript:" + error);
     }
 
-  
+
 
 });// /. ready
 

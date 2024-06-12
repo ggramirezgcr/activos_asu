@@ -112,7 +112,7 @@ include_once 'vistas/modulos/modal/modalLeerQR.php';
           <?php
           if (isset($_SESSION["secuestra_activos"])) {
             if ($_SESSION["secuestra_activos"] === 1) {
-             
+
               echo  '<ul class="nav nav-treeview">';
               echo '<li class="nav-item">';
               echo '<a href="incautarActivo" class="nav-link">';
@@ -121,7 +121,6 @@ include_once 'vistas/modulos/modal/modalLeerQR.php';
               echo '</a>';
               echo '</li>';
               echo '</ul>';
-              
             }
           };
 
@@ -138,6 +137,45 @@ include_once 'vistas/modulos/modal/modalLeerQR.php';
               </a>
             </li>
           </ul>
+
+
+
+          <ul class="nav nav-treeview" style="display: none;">
+            
+              
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                  Marcas 
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview" style="display: none;">
+                <li class="nav-item">
+                  <a href="marcasActivos" class="nav-link" >
+                    <i class="far fa-dot-circle nav-icon"></i>
+                    <p>Marcas</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview" style="display: none;">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-dot-circle nav-icon"></i>
+                    <p>Modelos</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+           <!-- <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Level 2</p>
+              </a>
+            </li>-->
+          </ul>
+
 
 
         </li> <!--/ . ACTIVOS-->
@@ -198,6 +236,56 @@ include_once 'vistas/modulos/modal/modalLeerQR.php';
 
         </li> <!--/ .PRESTAMO DE ACTIVOS-->
 
+
+
+
+        <!--// ====================================================== //
+            // ==================== MANTENIMIENTOS =================== //
+            // ====================================================== //-->
+
+      <!--      <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-circle"></i>
+              <p>
+                Mantenimientos
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+            
+              
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Marcas
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Modelos</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <!~~<li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Level 2</p>
+                </a>
+              </li>~~>
+            </ul>
+          </li>-->
+
+          <!--/. MANTENIMIENTOS-->
+
+
+
+
+
         <!--// ~~~~~~~~~~~~~~~ USUARIOS ~~~~~~~~~~~~~~ //-->
         <?php
 
@@ -218,11 +306,30 @@ include_once 'vistas/modulos/modal/modalLeerQR.php';
 
         ?>
 
+        <!--// ~~~~~~~~~~~~~~~ Funcionarios ~~~~~~~~~~~~~~ //-->
+        <?php
 
+        if (isset($_SESSION["perfil"])) {
+          if ($_SESSION["perfil"] === "Administrador") {
+            echo  '<li class="nav-item">';
+            echo '<a href="funcionarios" class="nav-link">';
 
+            echo '<i class="nav-icon fa fa-address-book"></i>';
+            echo '<p>';
+            echo 'funcionarios';
 
+            echo '</p>';
+            echo '</a>';
+            echo '</li>';
+          }
+        }
+
+        ?>
 
       </ul>
+
+
+
     </nav>
     <!-- /.MENU SIDEBAR -->
 

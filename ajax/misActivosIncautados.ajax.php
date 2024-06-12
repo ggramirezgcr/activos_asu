@@ -2,8 +2,8 @@
 
 require_once "../controladores/misActivosIncautados.controlador.php";
 require_once "../modelos/misActivosIncautados.modelo.php";
-require_once "../Controladores/helpers.controlador.php";
-require_once "../Controladores/email.controlador.php";
+require_once "../controladores/helpers.controlador.php";
+require_once "../controladores/email.controlador.php";
 require_once "../modelos/usuarios.modelo.php";
 
 

@@ -127,9 +127,7 @@ debugger;
   // ================ DEVOLVER ACTIVO ================== //
   // ====================================================== //
   $(document).on("click", "#btnDevolverActivo", function () {
-    //inicializar modal loading
-    $('#loadingModal').modal('show');
-
+    
     let id_sa = $(this).attr('idSolicitud');
 
     let placa = $(this).attr('placa');
@@ -156,6 +154,8 @@ debugger;
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
+//inicializar modal loading
+$('#loadingModal').modal('show');
 
         // Configurar las opciones para la solicitud Fetch
         var opciones = {
